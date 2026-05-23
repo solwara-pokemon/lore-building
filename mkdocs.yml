@@ -3,7 +3,6 @@ theme:
   name: material
 
 nav:
-  - Home: README.md
 docs_dir: .
 exclude_docs: |
   .github/
