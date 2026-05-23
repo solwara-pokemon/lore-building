@@ -3,7 +3,6 @@ theme:
   name: material
 
 nav:
-docs_dir: .
 exclude_docs: |
   .github/
   node_modules/
