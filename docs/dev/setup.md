@@ -11,7 +11,6 @@
 - Unified Filter system replaces all old FX/Mask systems
 
 ## Infrastructure
-- Proxmox host: `node.scooom.com:8006`
 - Game LXC hostname: `solwara`, private IP `10.8.0.10` (VPN only)
 - Public URL: `solwara.scooom.com` (nginx proxying to Vite dev server)
 - SSH: `ssh root@10.8.0.10` (over VPN) or `pct enter <CTID>` from Proxmox host
