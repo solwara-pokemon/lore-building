@@ -1,6 +1,13 @@
 site_name: My Repository Docs
-
 theme:
   name: material
 
 nav:
+  - Home: README.md
+docs_dir: .
+exclude_docs: |
+  .github/
+  node_modules/
+  venv/
+  *.py
+  *.yml
