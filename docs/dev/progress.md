@@ -154,8 +154,8 @@
 - [ ] Weather system
 - [ ] Terrain system
 - [ ] Entry hazards (Stealth Rock, Spikes, Toxic Spikes, Sticky Web)
-- [ ] Protect / Detect variants
-- [ ] OHKO moves
+- ✅ OHKO moves (Fissure, Guillotine, Horn Drill, Sheer Cold) — level-based accuracy, fails if target level > user level; Sheer Cold -10% vs non-Ice
+- ✅ Protect / Detect and variants (King's Shield, Spiky Shield, Baneful Bunker, Obstruct, Silk Trap) — base protection and consecutive diminishing returns (1/3 chance); secondary contact effects TODO
 - [ ] Switch-out moves (Volt Switch, U-turn, Flip Turn) — damage applies but switch doesn't trigger
 - [ ] Delayed damage (Future Sight, Doom Desire)
 
