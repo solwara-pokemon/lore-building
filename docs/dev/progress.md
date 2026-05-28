@@ -129,8 +129,17 @@
 - ✅ Run slots: team, inventory, timeStep, mapSeed, nodesVisited, balls, currentZoneIndex
 - ✅ nodesVisited only written on node completion (not on entry)
 
+### Lore / NPC System
+- ✅ `pickLoreEntry()` — seeded RNG, zone + time-of-day filter, rarity weighting (common 6×, uncommon 3×, rare 1×), skips discovered
+- ✅ `pickNpcEntry()` — same as above but filters to entries with `npcName`, no time-of-day restriction
+- ✅ Both functions accept `Set<string> | string[]` for discovered IDs
+
 ### Code Quality
-- ✅ `toHex()` utility — replaced 21 inline `toString(16).padStart(6,'0')` calls
+- ✅ `monName()` / `titleCase()` utility (`src/utils/monName.ts`) — all Pokémon name outputs now title-cased (Yungoos not YUNGOOS)
+- ✅ PartyPicker `'select'` mode — single-tap pick, no SWITCH overlay (used in RestScene train flow)
+- ✅ Evan sprite updated to new uploaded art
+
+
 - ✅ `SceneTypes.ts` — `NodeMapReturnData` includes nodeId? for completion tracking
 - ✅ `PartyPicker` 'pick' mode — excludePartyIndex option to hide active mon in battle
 - ✅ `stagesEqual()` helper in StatStages — replaces JSON.stringify comparisons
