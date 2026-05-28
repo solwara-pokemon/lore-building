@@ -18,6 +18,7 @@
 - ✅ SettingsScene (accessible from all scenes via per-scene button, returnTo pattern)
 - ✅ Role Select, Starter Select, Slot Select scenes
 - ✅ Logbook on title screen (browse all discovered lore)
+- ✅ BagViewer — scrollable bag overlay (finger/mouse drag, one item per row, tier colour-coded, opens PartyPicker on tap)
 
 ### Battle System
 - ✅ Typed BattleEvent[] stream — all battle actions are events
@@ -32,35 +33,54 @@
 - ✅ Nameplates with type badges, stat stages, status condition (colour-coded, updates mid-turn)
 - ✅ Status display on HUD — colour-coded pill, refreshes on apply and on cure
 - ✅ EXP bar + level up events (all 6 growth rate curves)
-- ✅ Faint → forced switch menu
+- ✅ Faint → forced switch menu (PartyPicker, no close button)
 - ✅ Enemy auto-swap on faint (enemy_send_out event, sprite rebuild)
 - ✅ Fainted pokemon's move skipped (engine-level fix)
 - ✅ Catching grants EXP (after caught message)
 - ✅ Failed catch → opponent attacks
 - ✅ Back sprites for player pokemon
 - ✅ Status conditions, abilities, type effectiveness
-- ✅ Voluntary switch during battle (PartyPicker 'pick' mode, SWITCH overlay on first tap, second tap confirms)
+- ✅ Voluntary switch during battle (PartyPicker 'pick' mode, SWITCH overlay on first tap, second tap confirms; active mon excluded from picker)
 - ✅ Pokéball throw animation (arc, open, shrink, bounce, shake, stars on catch)
 - ✅ Real catch rates from PokéAPI data
 - ✅ Move priority system wired to MoveRegistry (not movesDb)
 - ✅ Sleep Talk — Gen IX unselectable list (including Rest), Comatose support, actual sub-move execution, PP not consumed
+- ✅ player_send_out event — sprite + HUD update properly sequenced through event queue on both voluntary and forced switch
+
+### Held Item System
+- ✅ HeldItemEffects.ts — 7 hook functions (modifyDamageDealt, modifyDamageReceived, modifyStat, afterDamageDealt, endOfTurn, accuracyModifier, focusSash)
+- ✅ Life Orb — 1.3× damage, 1/10 maxHP recoil after each hit
+- ✅ Shell Bell — heals 1/8 of damage dealt
+- ✅ Choice Band — 1.5× Attack (physical), locks first move used
+- ✅ Choice Specs — 1.5× Sp. Attack (special), locks first move used
+- ✅ Choice Scarf — 1.5× Speed, locks first move used; locked moves greyed out in move menu
+- ✅ Expert Belt — 1.2× damage on super effective hits
+- ✅ Assault Vest — special damage ÷1.5; status moves blocked with message
+- ✅ Eviolite — 1.5× Def and SpDef if not fully evolved (checks evoChains)
+- ✅ Leftovers — +1/16 maxHP at end of turn
+- ✅ Black Sludge — +1/16 maxHP for Poison types; -1/8 maxHP for others
+- ✅ Rocky Helmet — deals 1/6 attacker's maxHP on contact moves
+- ✅ Focus Sash — survive one KO from full HP; item consumed on trigger
+- ✅ Kings Rock — 10% flinch chance on all damaging moves
+- ✅ Wide Lens — ×1.1 accuracy
+- ✅ Zoom Lens — ×1.2 accuracy only when moving second (movingSecond flag threaded through engine)
+- ✅ lockedMoveIndex cleared on switch-out
 
 ### Move System — Complete
 - ✅ MoveId const object (789 moves, PokéAPI numeric IDs)
 - ✅ Move / AttackMove / StatusMove / SelfStatusMove base classes with `.attr()` chaining
 - ✅ MoveAttr composition system — 16 attr classes:
-  - `StatusEffectAttr`, `StatChangeAttr`, `RecoilAttr`, `DrainAttr`, `HealAttr`
+  - `StatusEffectAttr` (accepts selfTarget param), `StatChangeAttr`, `RecoilAttr`, `DrainAttr`, `HealAttr`
   - `FlinchAttr`, `ConfuseAttr`, `FixedDamageAttr`, `LevelDamageAttr`, `MultiHitAttr`
   - `HpRatioDamageAttr`, `WeightDamageAttr`, `SpeedRatioDamageAttr`, `TargetHpDamageAttr`
   - `StageScaledDamageAttr`, `TwoTurnMoveAttr`
+  - `RestAttr` — full heal, clear status, apply 2-turn sleep (Gen IX)
 - ✅ MoveRegistry — all 789 moves registered at boot, engine routes through registry exclusively
 - ✅ All 16 type families fully declared (789/789 coverage)
-- ✅ Variable power moves fully implemented: Flail, Reversal, Water Spout, Dragon Energy, Eruption, Low Kick, Heavy Slam, Heat Crash, Grass Knot, Gyro Ball, Electro Ball, Wring Out, Crush Grip, Stored Power, Power Trip
-- ✅ Two-turn moves: Fly, Dig, Dive, Bounce, Phantom Force, Shadow Force, Sky Attack, Sky Drop, Solar Beam, Solar Blade, Freeze Shock, Ice Burn, Skull Bash, Razor Wind, Electro Shot, Geomancy — AI locks to charged move, cleared on faint/switch
-- ✅ Fixed damage: Dragon Rage (40), Sonic Boom (20)
-- ✅ Level-based damage: Night Shade, Seismic Toss
-- ✅ Multi-hit: Gen 5+ distribution for 2-5 hit; fixed counts for Double Kick, Surging Strikes etc.
-- ✅ Rest double-decrement fixed — sleep only decremented by tickStatus at end of turn (Gen IX)
+- ✅ Variable power moves fully implemented
+- ✅ Two-turn moves fully implemented
+- ✅ Fixed damage, level-based damage, multi-hit moves
+- ✅ Rest properly implemented via RestAttr (was declared but missing attrs)
 - ✅ MoveEffects.ts deleted — legacy system fully gone
 
 ### Trainer / Rival System
@@ -78,14 +98,11 @@
 - ✅ Isometric stagger layout
 - ✅ Pan / zoom / pinch-zoom (activePointers: 2)
 - ✅ Starts centred on active node at 1.6× zoom
-- ✅ Node selection, in-progress tracking (node only marked visited on return to map)
-- ✅ Wild encounter node (type-biased, BST ceiling per zone, min level 2)
-- ✅ Trainer node (Youngster, seeded team)
-- ✅ Rival node (Evan with iris sprite)
-- ✅ Rest node (heal / train move) — uses PartyPicker 'pick' mode for mon selection
-- ✅ Lore node (5 types: document, gossip, broadcast, relic, rumour)
-- ✅ Item node — item card selection fixed (hit zone offset bug resolved)
-- ✅ Settlement, Rescue, NPC, Mystery, Evolution nodes
+- ✅ Node selection; node only marked visited on completion (markNodeComplete refactor)
+- ✅ markNodeComplete — static method on NodeMapScene; every node scene calls it on successful completion before returning to map
+- ✅ Mystery node — all 8 resolved types pass nodeId correctly; lore/item no-entry fallback calls markNodeComplete
+- ✅ currentZoneIndex persisted to save on every node entry; restored on load (fixes skip-wave bug)
+- ✅ All node types: Wild, Trainer, Rival, Rest, Lore, Item, Settlement, Rescue, NPC, Mystery, Evolution
 - ✅ Logbook (account-level, accessible from title + node map)
 - ✅ Zone themes (8 distinct visual identities)
 
@@ -100,34 +117,38 @@
 ### Items
 - ✅ Full consumable item pool with tier weights and floor unlocks
 - ✅ Full Heal conditional — only appears if team member has non-volatile status condition
-- ✅ Held item pool (15 items — equippable but no battle effect yet)
+- ✅ All 15 held items fully implemented in battle (see Held Item System above)
+- ✅ Ball items — Poké Ball ×5 (Common), Great Ball ×5 (Uncommon), Ultra Ball ×5 (Rare)
+- ✅ Ball rewards correctly write to slot.balls (not inventory) via ball: effect handler in RewardHandler
 - ✅ EXP Charm (stackable, +50% EXP each)
 - ✅ Item loot generation passes party for conditional filtering
 - ✅ Antidote, Awakening, Burn Heal removed (redundant given Full Heal)
 
 ### Save System
 - ✅ Account-level: discoveredLore[], unlockedCharms, roles
-- ✅ Run slots: team, inventory, timeStep, mapSeed, nodesVisited, balls
-- ✅ `currentNodeId` tracks in-progress node (not written to nodesVisited until return)
+- ✅ Run slots: team, inventory, timeStep, mapSeed, nodesVisited, balls, currentZoneIndex
+- ✅ nodesVisited only written on node completion (not on entry)
 
 ### Code Quality
 - ✅ `toHex()` utility — replaced 21 inline `toString(16).padStart(6,'0')` calls
-- ✅ `SceneTypes.ts` — `NodeMapReturnData` shared type across all node scenes
-- ✅ `PartyPicker` 'pick' mode — all party selection flows use same UI
+- ✅ `SceneTypes.ts` — `NodeMapReturnData` includes nodeId? for completion tracking
+- ✅ `PartyPicker` 'pick' mode — excludePartyIndex option to hide active mon in battle
+- ✅ `stagesEqual()` helper in StatStages — replaces JSON.stringify comparisons
 - ✅ `ZONE_ORDER` single export from MapGenerator
 - ✅ `ms()` wraps all timing values
-- ✅ `status_change` events — HUD refreshes mid-turn on any status change (apply, cure, wake, thaw)
+- ✅ `status_change` events — HUD refreshes mid-turn on any status change
 
 ## TODO
 
 ### Battle
-- [ ] Held item effects in battle (15 held items currently decorative)
 - [ ] Invulnerability frames for two-turn invisible moves (Fly, Dig, Dive, Bounce, Phantom Force, Shadow Force) — `chargingMove.invisible` flag exists but engine doesn't skip accuracy check for invisible targets yet
 - [ ] Weather system
 - [ ] Terrain system
 - [ ] Entry hazards (Stealth Rock, Spikes, Toxic Spikes, Sticky Web)
 - [ ] Protect / Detect variants
 - [ ] OHKO moves
+- [ ] Switch-out moves (Volt Switch, U-turn, Flip Turn) — damage applies but switch doesn't trigger
+- [ ] Delayed damage (Future Sight, Doom Desire)
 
 ### Content
 - [ ] Gym battles (GymScene not started)
@@ -137,6 +158,7 @@
 - [ ] More lore entries
 - [ ] More trainer classes
 - [ ] Elite Four
+- [ ] Items usable during battle (in-battle bag UI)
 
 ## Architecture Notes
 - **Phaser 4 only** — `filters.addGlow()`, not `postFX.addGlow()`
@@ -151,3 +173,4 @@
 - Pokéball sprites: PokeRogue `public/images/pb.json` / `pb.png` (multiatlas, frames: `pb`, `pb_opening`, `pb_open` per ball type)
 - Move registry populated at boot via `registerAll()` in SplashScene
 - `movesDb` / `moves.json` still used by `BattleMenus`, `RestScene`, `RescueScene` for display (names, PP) — not battle logic
+- Held item hooks: 7 functions in `HeldItemEffects.ts`, called from `BattleEngine` at exact points; `BattlePokemon` carries `heldItem` + `lockedMoveIndex`
