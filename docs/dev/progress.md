@@ -150,7 +150,7 @@
 ## TODO
 
 ### Battle
-- [ ] Invulnerability frames for two-turn invisible moves (Fly, Dig, Dive, Bounce, Phantom Force, Shadow Force) — `chargingMove.invisible` flag exists but engine doesn't skip accuracy check for invisible targets yet
+- ✅ Invulnerability frames for two-turn invisible moves — `chargingMove.invisible` flag checked in engine; bypass moves (Earthquake vs Dig, Surf vs Dive, etc.) deal double damage via `INVULNERABILITY_BYPASSES`
 - [ ] Weather system
 - [ ] Terrain system
 - [ ] Entry hazards (Stealth Rock, Spikes, Toxic Spikes, Sticky Web)
