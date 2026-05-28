@@ -12,28 +12,9 @@ Active list of known issues, deferred work, and architectural debt. Updated as i
 **Fix:** In `resolveMove`, before the accuracy check, test if `defender.chargingMove?.invisible === true` and skip the move (show "avoided the attack" message) unless the attacking move has a specific bypass flag (e.g. Earthquake hits Dig, Gust hits Fly).
 **Priority:** Medium
 
-### `String Shot` declared in both GrassMoves and BugMoves
-**Location:** `src/systems/battle/moves/moves/GrassMoves.ts` line ~40
-**Cause:** Copy-paste error during family file authoring.
-**Fix:** Remove the entry from `GrassMoves.ts`. String Shot is a Bug-type move.
-**Priority:** Low
-
 ---
 
 ## Unimplemented Mechanics
-
-### Held items do nothing in battle
-All 15 held items can be equipped via the bag but `BattlePokemon.heldItem` is never read by the engine. None of the following effects are implemented:
-- Shell Bell (heal 1/8 of damage dealt)
-- Life Orb (1.3× damage, 10% recoil)
-- Choice Band/Specs/Scarf (1.5× stat, lock to first move)
-- Focus Sash (survive one KO hit at full HP)
-- Rocky Helmet (deal 1/6 HP to contact attackers)
-- Assault Vest (1.5× SpDef, block status moves)
-- Leftovers / Black Sludge (end-of-turn heal/damage)
-- Expert Belt (1.2× on super effective hits)
-- Eviolite (1.5× Def/SpDef if not fully evolved)
-- Wide Lens / Zoom Lens / Kings Rock (accuracy/flinch modifiers)
 
 ### Weather system
 Rain Dance, Sunny Day, Sandstorm, Hail, Snowscape — all declared as `not` in their move families. No weather state on `BattleState`, no weather-dependent move power modifiers, no end-of-turn weather damage.
@@ -71,6 +52,9 @@ Evan uses the Iris sprite as a placeholder. `public/images/trainers/iris.json` a
 ### Rival team scaling across zones
 Rival fights use `RivalTeamGen.ts` with predefined fight numbers. The scaling across all 8 zones has not been playtested.
 
+### In-battle bag UI
+The BAG button in battle currently shows a basic item list. A proper in-battle bag (filter to usable battle items, use on party mon) is not yet implemented.
+
 ---
 
 ## Architecture Debt
@@ -88,18 +72,31 @@ Move names are stored as strings for display but the engine uses numeric `moveId
 
 ## Resolved (for reference)
 
+- ✅ Held items had no battle effect — fixed, full `HeldItemEffects.ts` attr system implemented (all 15 items)
+- ✅ Ball items gave 1× instead of 5× and wrote to inventory — fixed, `ball:` effect handler in `RewardHandler` writes to `slot.balls`; fallback item key corrected
+- ✅ Active mon appeared in voluntary/forced switch picker — fixed, `excludePartyIndex` option on `PartyPicker`
+- ✅ Close button on forced switch picker caused softlock — fixed, button hidden when no `onCancel` provided
+- ✅ Skip-wave on load — fixed, `currentZoneIndex` now persisted to save on every node entry and restored on continue
+- ✅ Node marked visited before completion — fixed, `markNodeComplete` refactored to static method called by each node scene on success only
+- ✅ Mystery node trainer/npc/rescue/settlement branches missing `nodeId` — fixed
+- ✅ Lore/item no-entry fallback didn't call `markNodeComplete` — fixed
+- ✅ `JSON.stringify` used for stat stage comparison — replaced with `stagesEqual()` helper
+- ✅ `freshSlot` renamed from `freshSlot2` (naming leftover from refactor)
+- ✅ Dead `nodeId` param on `markNodeEntered` — removed
+- ✅ `String Shot` declared in both GrassMoves and BugMoves — removed from GrassMoves
 - ✅ `ZONE_ORDER` duplicated in `RivalTeamGen` — fixed, now imports from `MapGenerator`
 - ✅ `ms()` missing from `LoreScene` / `RestScene` fadeOut calls — fixed
 - ✅ `caughtMon` typed as `any` in `BattleSceneData` — fixed, field added to interface
 - ✅ `console.log` noise in `UIScene` — removed
-- ✅ Node marked visited before completion — fixed, `currentNodeId` tracks in-progress, `nodesVisited` only written on return
 - ✅ Exp share gave 0 when active mon at level cap — fixed via `calcExpBase`
 - ✅ Exp bar animated for bench mons — fixed via `isActivePlayer` flag on `exp_gain` events
 - ✅ RestScene custom party picker — replaced with `PartyPicker` `'pick'` mode
 - ✅ Item node cards unresponsive — fixed, hit zone was offset due to container origin
 - ✅ Ball throw animation froze after recoil — fixed, `RecoilAttr` now emits `hp_change` not custom `damage` event
 - ✅ Rest wakes up early — fixed, sleep turns only decremented in `tickStatus` (end of turn), not `checkPreMove`
-- ✅ Variable power moves did nothing — fixed via `HpRatioDamageAttr`, `WeightDamageAttr`, `SpeedRatioDamageAttr`, `TargetHpDamageAttr`, `StageScaledDamageAttr`
-- ✅ Two-turn moves did nothing — fixed via `TwoTurnMoveAttr`, `chargingMove` state on `BattlePokemon`
-- ✅ `MoveEffects.ts` legacy fallback — deleted, all 789 moves now route through `MoveRegistry`
-- ✅ Status not showing on HUD after Rest/paralysis — fixed via `status_change` events emitted by engine at every status transition
+- ✅ Variable power moves did nothing — fixed via attr system
+- ✅ Two-turn moves did nothing — fixed via `TwoTurnMoveAttr`
+- ✅ `MoveEffects.ts` legacy fallback — deleted
+- ✅ Status not showing on HUD after Rest/paralysis — fixed via `status_change` events
+- ✅ Rest had no attrs despite `.implemented('full')` — fixed via `RestAttr`
+- ✅ player_send_out event missing — sprite/HUD update now properly sequenced through event queue
