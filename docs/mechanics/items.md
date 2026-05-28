@@ -53,29 +53,44 @@ All consumables are fully implemented unless noted.
 ### EXP All
 The Exp All item grants EXP share to the entire party. Up to 4 can be found in a run. Combined with 5 EXP Charms, bench Pokémon can receive 100%+ of the battler's EXP.
 
+### Poké Balls
+| Item | Effect | Tier | Min Floor |
+|---|---|---|---|
+| Poké Ball ×5 | Adds 5 Poké Balls to bag | 1 | 1 |
+| Great Ball ×5 | Adds 5 Great Balls to bag | 2 | 1 |
+| Ultra Ball ×5 | Adds 5 Ultra Balls to bag | 3 | 2 |
+
+Ball items write directly to `slot.balls` (not inventory) via the `ball:<key>:<count>` effect handler in `RewardHandler`.
+
 ---
 
 ## Held Items
 
-Held items can be equipped to a Pokémon from the bag. They currently **have no effect in battle** — this is a known tech debt item. All held items are in the loot pool and can be found, equipped, and displayed, but their passive effects are not implemented.
+All held items are fully implemented in battle via `HeldItemEffects.ts`.
 
-| Item | Intended Effect | Tier | Min Floor |
+| Item | Effect | Tier | Min Floor |
 |---|---|---|---|
-| Wide Lens | +10% move accuracy | 1 | 1 |
+| Wide Lens | ×1.1 move accuracy | 1 | 1 |
 | Shell Bell | Heal 1/8 of damage dealt | 1 | 2 |
-| Kings Rock | +10% flinch chance | 1 | 2 |
-| Expert Belt | 1.2× damage on super effective hits | 2 | 2 |
-| Zoom Lens | +20% accuracy if moving second | 2 | 3 |
-| Eviolite | 1.5× Def and SpDef if not fully evolved | 2 | 3 |
+| Kings Rock | +10% flinch chance on all damaging moves | 1 | 2 |
+| Expert Belt | ×1.2 damage on super effective hits | 2 | 2 |
+| Zoom Lens | ×1.2 accuracy when moving second | 2 | 3 |
+| Eviolite | ×1.5 Def and SpDef if not fully evolved | 2 | 3 |
 | Leftovers | Restore 1/16 max HP per turn | 2 | 3 |
-| Focus Sash | Survive one KO hit at full HP | 3 | 4 |
+| Black Sludge | Poison types: +1/16 HP/turn; others: −1/8 HP/turn | 2 | 3 |
+| Focus Sash | Survive one KO hit at full HP; consumed on trigger | 3 | 4 |
 | Rocky Helmet | Deal 1/6 HP to contact attackers | 3 | 4 |
-| Assault Vest | 1.5× SpDef; blocks status moves | 3 | 4 |
-| Black Sludge | Poison types: +1/16 HP/turn; others: -1/8 HP/turn | 2 | 3 |
-| Choice Band | 1.5× Attack; locked to first move | 3 | 4 |
-| Choice Specs | 1.5× Sp. Attack; locked to first move | 3 | 4 |
-| Choice Scarf | 1.5× Speed; locked to first move | 3 | 4 |
-| Life Orb | 1.3× damage; 10% recoil on use | 3 | 4 |
+| Assault Vest | Special damage ÷1.5; blocks status moves | 3 | 4 |
+| Choice Band | ×1.5 Attack (physical); locks first move used | 3 | 4 |
+| Choice Specs | ×1.5 Sp. Attack (special); locks first move used | 3 | 4 |
+| Choice Scarf | ×1.5 Speed; locks first move used | 3 | 4 |
+| Life Orb | ×1.3 damage; 10% max HP recoil per hit | 3 | 4 |
+
+### Choice Item Locking
+When a Pokémon holds a Choice item and uses a move, `lockedMoveIndex` is set on `BattlePokemon`. All other moves are greyed out in the move menu. The lock clears on switch-out. The engine blocks non-locked moves with a "can't use that move!" message.
+
+### Zoom Lens Condition
+Zoom Lens only applies its accuracy bonus when the bearer moves after the opponent. The `movingSecond` flag is derived from turn order in `resolveTurnToEvents` and threaded into `resolveMove` → `accuracyCheck`.
 
 ---
 
@@ -89,6 +104,19 @@ Held items can be equipped to a Pokémon from the bag. They currently **have no 
 4. Weight candidates by tier, return `count` choices
 
 The `party` parameter (array of `RunPokemon`) is passed from both `ItemScene` and `RewardHandler` so conditional filtering is always team-aware.
+
+---
+
+## Bag UI
+
+The BagViewer component (`src/ui/components/BagViewer.ts`) provides a scrollable overlay:
+- One item per row (56px height)
+- Sorted by tier descending (rarest first)
+- Left accent bar colour-coded by tier
+- Shows name, description, count, and HELD/USE badge
+- Finger drag scrolling with geometry mask clipping
+- Mouse wheel support
+- Tapping a row opens PartyPicker in equip-item or use-item mode as appropriate
 
 ---
 
