@@ -158,7 +158,7 @@
 - ✅ Protect / Detect and variants (King's Shield, Spiky Shield, Baneful Bunker, Obstruct, Silk Trap) — base protection, consecutive diminishing returns (1/3 chance), and secondary contact effects fully implemented
 - ✅ Contact system — `AttackMove.contact` field (physical default true, special default false); `.noContact()` marks 40 physical non-contact moves; `.makeContact()` marks 5 special contact moves (Grass Knot, Draining Kiss, Infestation, Oblivion Wing, Sparkling Aria)
 - ✅ Shell Side Arm — dynamic physical/special resolution; contact flag follows whichever category wins
-- [ ] Switch-out moves (Volt Switch, U-turn, Flip Turn) — damage applies but switch doesn't trigger
+- ✅ Switch-out moves (U-turn, Volt Switch, Flip Turn) — damage then triggers forced switch UI if player has a healthy alternative
 - [ ] Delayed damage (Future Sight, Doom Desire)
 
 ### Content
