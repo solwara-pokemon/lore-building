@@ -225,7 +225,7 @@
 
 ### Content
 - [ ] Gym battles (GymScene not started)
-- [ ] Evan real sprite (currently using iris placeholder)
+- ✅ Evan real sprite — `evan.png`/`evan.json` loaded for rival battles
 - [ ] Move Mastery system
 - [ ] Meta shop (Solwara Coins flow)
 - [ ] More lore entries
