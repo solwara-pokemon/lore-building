@@ -163,6 +163,9 @@
 - ✅ Parting Shot (Dark status move) — lowers Atk/SpAtk then triggers switch UI
 - ✅ Battle messages auto-advance after pause (BASE_MSG_PAUSE); tap skips wait; trainer dialog still tap-to-continue
 - ✅ Stale pointerdown listeners tracked and explicitly removed — fixes pokéball rethrow bug
+- ✅ Fast-tap race condition fixed — autoAdvance handler removes itself before nulling ref; no orphaned .on() listeners; cancelTypewriter clears all listeners
+- ✅ setPromptText() — static "What will X do?" label, registers zero input listeners
+- ✅ Run (flee) now saves full team state (HP/PP/status) and calls markNodeComplete before returning to map
 - ✅ Damage numbers: larger (26px) and linger longer (1400ms)
 - ✅ Active mon greyed out in PartyPicker (dark blue tint, "IN BATTLE" label, untappable)
 - ✅ AI improvements: OHKO level check, Protect scoring by HP ratio, hazard awareness (skips already-set hazards), pivot moves boosted at low HP
