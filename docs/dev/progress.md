@@ -153,13 +153,13 @@
 - ✅ Invulnerability frames for two-turn invisible moves — `chargingMove.invisible` flag checked in engine; bypass moves (Earthquake vs Dig, Surf vs Dive, etc.) deal double damage via `INVULNERABILITY_BYPASSES`
 - [ ] Weather system
 - [ ] Terrain system
-- [ ] Entry hazards (Stealth Rock, Spikes, Toxic Spikes, Sticky Web)
+- ✅ Entry hazards — Stealth Rock (type-effective damage), Spikes (1-3 layers: 1/8, 1/6, 1/4), Toxic Spikes (1-2 layers; absorbed by Poison types), Sticky Web (Speed -1); applied on switch-in to both sides
 - ✅ OHKO moves (Fissure, Guillotine, Horn Drill, Sheer Cold) — level-based accuracy, fails if target level > user level; Sheer Cold -10% vs non-Ice
 - ✅ Protect / Detect and variants (King's Shield, Spiky Shield, Baneful Bunker, Obstruct, Silk Trap) — base protection, consecutive diminishing returns (1/3 chance), and secondary contact effects fully implemented
 - ✅ Contact system — `AttackMove.contact` field (physical default true, special default false); `.noContact()` marks 40 physical non-contact moves; `.makeContact()` marks 5 special contact moves (Grass Knot, Draining Kiss, Infestation, Oblivion Wing, Sparkling Aria)
 - ✅ Shell Side Arm — dynamic physical/special resolution; contact flag follows whichever category wins
 - ✅ Switch-out moves (U-turn, Volt Switch, Flip Turn) — damage then triggers forced switch UI if player has a healthy alternative
-- [ ] Delayed damage (Future Sight, Doom Desire)
+- ✅ Delayed damage (Future Sight, Doom Desire) — damage pre-calculated at use time from user's Sp. Atk, fires after 2 turns via end-of-turn tick, respects type immunity
 
 ### Content
 - [ ] Gym battles (GymScene not started)
