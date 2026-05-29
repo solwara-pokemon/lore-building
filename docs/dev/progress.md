@@ -159,6 +159,21 @@
 - ✅ WeatherOverlay — particle emitters + screen tint per weather type, respects ms()/getSpeedFactor()
 - ✅ `weather_change` battle event drives visual transitions; clears on expiry or overwrite
 
+### Terrain System
+- ✅ TerrainAttr — mirrors WeatherAttr, engine reads to set terrain state
+- ✅ BattleState terrain + terrainTurns fields; terrain_change event type
+- ✅ MoveContext terrain field threaded to all attrs
+- ✅ Terrain power modifiers: +30% Electric/Grass/Psychic (grounded attacker); −50% Dragon (Misty, grounded defender)
+- ✅ Grassy Terrain halves Earthquake, Bulldoze, Magnitude
+- ✅ Grassy Terrain end-of-turn +1/16 HP heal for grounded Pokémon
+- ✅ 5-turn expiry with messages; terrain_change event on expiry
+- ✅ Misty Terrain blocks all non-volatile status + confusion (grounded only)
+- ✅ Electric Terrain blocks sleep (grounded only)
+- ✅ Psychic Terrain blocks priority moves hitting grounded Pokémon
+- ✅ Surge abilities (electric-surge, grassy-surge, misty-surge, psychic-surge) in onSwitchIn
+- ✅ All 4 terrain moves registered: Electric Terrain, Grassy Terrain, Misty Terrain, Psychic Terrain
+- ✅ TerrainOverlay — bottom-edge gradient glow + subtle field tint, colour per terrain (yellow/green/purple/pink), gentle alpha pulse; reuses showWeatherAnimations toggle; depth 52
+
 ### Battle System — Additional
 - ✅ Parting Shot (Dark status move) — lowers Atk/SpAtk then triggers switch UI
 - ✅ Battle messages auto-advance after pause (BASE_MSG_PAUSE); tap skips wait; trainer dialog still tap-to-continue
@@ -196,7 +211,6 @@
 ## TODO
 
 ### Battle
-- [ ] Terrain system
 - [ ] In-battle item use (bag UI during battle)
 
 ### Content
