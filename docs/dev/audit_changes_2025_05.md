@@ -79,20 +79,62 @@ This closes the race: any call to `clearAllListeners` within the 50ms window wil
 
 ---
 
-## Items left open from the audit
+---
 
-The following issues from `code_audit_2025_05.md` were not fixed in this pass. They remain valid but are lower urgency or require more design consideration:
+## Pass 2 — §2.2, §2.5, §2.3 (commit `92547f2`)
 
-| Audit ref | Issue | Reason deferred |
-|-----------|-------|----------------|
-| §2.2 | AI hazard context not passed on switch/ball actions | Low observable impact; AI fix on own ticket |
-| §2.3 | Save version backfill incomplete | Safe in practice due to `?? {}` guards; fix when save version bumps |
-| §2.5 | `toxicCounter` not reset on cure | Edge-case; no confirmed report |
-| §3.1 | `as any` probe in BattleMenus | TextButton refactor needed first |
-| §3.2 | Duplicated team-save block in endBattle | Extract when endBattle gets further changes |
-| §3.4 | `showDialogLines` duplicated | Minor; fix in a housekeeping pass |
-| §3.5 | Tech debt doc lists implemented items | Update in next dev doc pass |
-| §3.6 | `void moveName` dead variable | Trivial; fix opportunistically |
-| §3.7 | Hardcoded inventory key strings | Fix when ItemData gets constants |
-| §4.1 | `resolveMove` is 350+ lines | Major refactor; needs its own branch |
-| §4.4–4.5 | Catch logic in menu layer; switch_required queue mutation | Design decisions; defer |
+### §2.2 — AI hazard context in normal move turns
+
+**File:** `src/systems/battle/BattleEngine.ts` → `determineTurnOrder`
+
+The `chooseMove` call inside `determineTurnOrder` — which selects the opponent's move during regular (non-switch, non-run, non-ball) turns — was not passing `opponentHazards`. The three other call sites (run, ball, switch branches) already passed it correctly. The fix is a one-liner: add `opponentHazards: state.playerHazards` to the `determineTurnOrder` call.
+
+**Effect:** The AI now correctly avoids wasting turns re-setting hazards it already placed during normal combat turns, matching the behaviour that was already correct in the escape/catch/switch branches.
+
+### §2.5 — `toxicCounter` reset when status is cleared
+
+**Files:** `src/systems/battle/StatusEffects.ts`, `src/systems/battle/moves/attrs/WakeUpSlapAttr.ts`
+
+Added a `clearStatus(mon: BattlePokemon)` helper that resets `status`, `statusTurns`, and `toxicCounter` together. All in-battle status-clearing paths now use it:
+
+- `tickStatus` — sleep waking up naturally
+- `checkPreMove` — freeze thawing before a move
+- `WakeUpSlapAttr` — waking the target on hit
+
+`tryApplyStatus` already reset `toxicCounter = 1` on fresh badly-poison application, so the bug only manifested if a mon accumulated a counter, was cured via one of the paths above, then was re-poisoned by the opponent. The counter would resume from its previous value instead of starting fresh at 1/16. Now any status clear resets it to 0, so a fresh poison always starts clean.
+
+### §2.3 — Save migration system
+
+**File:** `src/systems/saves/SaveManager.ts`
+
+Replaced the old `version === SAVE_VERSION` check + single `discoveredLore` backfill with a proper migration system:
+
+- `migrate(raw)` — accepts any parsed JSON object, returns a fully-valid v1 `SaveData`. Preserves all recoverable data (coins, starters unlocked, runs completed, lore, run slots, team members). Fields absent from the raw save are filled with safe defaults.
+- `migrateSlot(s, i)` — shapes one run slot, backfilling every field in the `RunSlot` interface.
+- `migratePokemon(p)` — shapes one team member, backfilling `heldItem`, `currentExp`, `pp`, `maxPp`, and all other `RunPokemon` fields.
+
+All load paths now go through `migrate()`:
+- `load()` — called on startup from `localStorage`
+- `loadFromData()` — called when importing a `.solsav` file
+
+`migrate()` is idempotent for up-to-date saves, so current-version saves are unaffected. Pre-release saves with any missing fields are now fully recovered rather than discarded. `SAVE_VERSION` remains at `1` — the intent is that `1` is the release version and everything before it migrates in cleanly.
+
+---
+
+## Open items (updated)
+
+| Audit ref | Issue | Status |
+|-----------|-------|--------|
+| §2.2 | AI hazard context on normal turns | ✅ Fixed pass 2 |
+| §2.3 | Save backfill incomplete | ✅ Fixed pass 2 (full migration system) |
+| §2.5 | `toxicCounter` not reset on cure | ✅ Fixed pass 2 |
+| §3.1 | `as any` probe in BattleMenus | Open — TextButton refactor needed first |
+| §3.2 | Duplicated team-save block in endBattle | Open — extract when endBattle changes |
+| §3.4 | `showDialogLines` duplicated | Open — housekeeping pass |
+| §3.5 | Tech debt doc lists implemented items | Open — next doc pass |
+| §3.6 | `void moveName` dead variable | Open — fix opportunistically |
+| §3.7 | Hardcoded inventory key strings | Open — fix when ItemData gets constants |
+| §4.1 | `resolveMove` is 350+ lines | Open — major refactor, own branch |
+| §4.2 | Duplicate delayed-damage handling | Open |
+| §4.3 | Weather accuracy by string match | Open |
+| §4.4–4.5 | Catch logic in menu layer; switch_required queue mutation | Open — design decisions |
