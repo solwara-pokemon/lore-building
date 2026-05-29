@@ -176,6 +176,16 @@
 
 ### Battle System — Additional
 - ✅ Parting Shot (Dark status move) — lowers Atk/SpAtk then triggers switch UI
+- ✅ Recharge moves — Hyper Beam, Giga Impact, Rock Wrecker, Roar of Time, Eternabeam, Meteor Assault, Prismatic Laser all skip next turn via RechargeAttr
+- ✅ Foul Play — uses target's Attack stat (FoulPlayAttr, statAtkMult in damage path)
+- ✅ Body Press — uses user's Defense stat instead of Attack (BodyPressAttr)
+- ✅ Knock Off — 1.5× damage if target holds item, then removes the item (KnockOffAttr)
+- ✅ Assurance — doubles power if target was already damaged this turn (AssuranceAttr + damagedThisTurn flag)
+- ✅ Payback — doubles power if user moved second (PaybackAttr + movedSecond in MoveContext)
+- ✅ Revenge — doubles power if user was damaged this turn (RevengeAttr)
+- ✅ Wake-Up Slap — doubles power vs sleeping target, cures sleep (WakeUpSlapAttr)
+- ✅ Sucker Punch — fails if target is not using a damaging move (SuckerPunchAttr + pendingPlayerMoveIndex)
+- ✅ Dragon Tail / Circle Throw — force opponent to switch to random party member; ends wild battle (ForceSwitchAttr)
 - ✅ Battle messages auto-advance after pause (BASE_MSG_PAUSE); tap skips wait; trainer dialog still tap-to-continue
 - ✅ Stale pointerdown listeners tracked and explicitly removed — fixes pokéball rethrow bug
 - ✅ Fast-tap race condition fixed — autoAdvance handler removes itself before nulling ref; no orphaned .on() listeners; cancelTypewriter clears all listeners
