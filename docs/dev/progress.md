@@ -151,7 +151,14 @@
 
 ### Battle
 - ✅ Invulnerability frames for two-turn invisible moves — `chargingMove.invisible` flag checked in engine; bypass moves (Earthquake vs Dig, Surf vs Dive, etc.) deal double damage via `INVULNERABILITY_BYPASSES`
-- [ ] Weather system
+- ✅ Weather system — Rain, Sun, Sandstorm, Snow (Hail skipped: Gen 9 replaced by Snow)
+  - Damage: Water/Fire ×1.5/×0.5 in Rain; Fire/Water ×1.5/×0.5 in Sun
+  - End-of-turn: Sandstorm/Snow deal 1/16 max HP (Rock/Ground/Steel immune to Sand; Ice immune to Snow)
+  - Accuracy: Thunder/Hurricane always hit in Rain, 50% in Sun
+  - Stat boosts: Rock +50% SpDef in Sandstorm; Ice +50% Def in Snow
+  - Speed abilities: Swift Swim, Chlorophyll, Sand Rush, Slush Rush (×2 in matching weather)
+  - Weather abilities on switch-in: Drought, Drizzle, Sand Stream, Snow Warning
+  - Ability effects: Rain Dish (heal 1/16 in Rain), Dry Skin (heal 1/8 in Rain / take 1/8 in Sun), Solar Power (+50% SpAtk / take 1/8 in Sun), Ice Body (heal 1/16 in Snow)
 - [ ] Terrain system
 - ✅ Entry hazards — Stealth Rock (type-effective damage), Spikes (1-3 layers: 1/8, 1/6, 1/4), Toxic Spikes (1-2 layers; absorbed by Poison types), Sticky Web (Speed -1); applied on switch-in to both sides
 - ✅ OHKO moves (Fissure, Guillotine, Horn Drill, Sheer Cold) — level-based accuracy, fails if target level > user level; Sheer Cold -10% vs non-Ice
