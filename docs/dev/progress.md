@@ -138,6 +138,49 @@
 - ✅ `monName()` / `titleCase()` utility (`src/utils/monName.ts`) — all Pokémon name outputs now title-cased (Yungoos not YUNGOOS)
 - ✅ PartyPicker `'select'` mode — single-tap pick, no SWITCH overlay (used in RestScene train flow)
 - ✅ Evan sprite updated to new uploaded art
+- ✅ `SegmentedControl` component — reusable horizontal option picker (highlighted active segment, generic typed API)
+- ✅ TypeScript zero-error baseline — fixed all pre-existing errors (missing imports, undefined→null, BagViewer wheel handler)
+
+### Settings UI
+- ✅ Full-screen layout — labelled rows with subtitles, bottom bar (Back left / Export↓ Import↑ right)
+- ✅ Game Speed — `SegmentedControl` (Slow / Normal / Fast), replaces tap-to-cycle
+- ✅ Move Animations toggle — ON/OFF, gates `animPlayer.play()` in BattleFlow
+- ✅ Weather Animations toggle — ON/OFF, gates `WeatherOverlay.setWeather()` visuals
+- ✅ Damage Numbers toggle (existing, now in full-screen row layout)
+
+### Weather System
+- ✅ Rain, Sun, Sandstorm, Snow (Hail skipped — Gen 9 replaced by Snow)
+- ✅ Damage modifiers: Water/Fire ×1.5/×0.5 in Rain; Fire/Water ×1.5/×0.5 in Sun
+- ✅ End-of-turn: Sandstorm 1/16 damage (Rock/Ground/Steel immune); Snow no damage (Ice +50% Def only)
+- ✅ Accuracy overrides: Thunder/Hurricane always hit in Rain, 50% in Sun
+- ✅ Speed abilities: Swift Swim, Chlorophyll, Sand Rush, Slush Rush (×2 in matching weather)
+- ✅ Weather-setting abilities on switch-in: Drought, Drizzle, Sand Stream, Snow Warning
+- ✅ Ability end-of-turn: Rain Dish, Dry Skin, Solar Power, Ice Body
+- ✅ WeatherOverlay — particle emitters + screen tint per weather type, respects ms()/getSpeedFactor()
+- ✅ `weather_change` battle event drives visual transitions; clears on expiry or overwrite
+
+### Battle System — Additional
+- ✅ Parting Shot (Dark status move) — lowers Atk/SpAtk then triggers switch UI
+- ✅ Battle messages auto-advance after pause (BASE_MSG_PAUSE); tap skips wait; trainer dialog still tap-to-continue
+- ✅ Stale pointerdown listeners tracked and explicitly removed — fixes pokéball rethrow bug
+- ✅ Damage numbers: larger (26px) and linger longer (1400ms)
+- ✅ Active mon greyed out in PartyPicker (dark blue tint, "IN BATTLE" label, untappable)
+- ✅ AI improvements: OHKO level check, Protect scoring by HP ratio, hazard awareness (skips already-set hazards), pivot moves boosted at low HP
+- ✅ Correct `implemented('partial')` flags — 19 moves demoted from false 'full' status
+
+### Contact System
+- ✅ `AttackMove.contact` on base `Move` class (physical default true, special default false)
+- ✅ `.noContact()` — 40 physical non-contact moves marked (Earthquake, Rock Slide, Explosion, etc.)
+- ✅ `.makeContact()` — 5 special contact moves (Grass Knot, Draining Kiss, Infestation, Oblivion Wing, Sparkling Aria)
+- ✅ Shell Side Arm — `ShellSideArmAttr`; probes calcDamage twice, uses higher, sets contact flag accordingly
+
+### Protect Secondary Effects
+- ✅ `protectVariant` stored on BattlePokemon when protect activates
+- ✅ King's Shield → Attack −2 on contact; Spiky Shield → 1/8 HP damage; Baneful Bunker → poison; Obstruct → Def −2; Silk Trap → Speed −1
+
+### Version
+- ✅ `src/version.ts` — VERSION = '0.1.1'
+- ✅ Title screen shows *The Flooded Region* v0.1.1 (italic subtitle + plain version tag)
 
 
 - ✅ `SceneTypes.ts` — `NodeMapReturnData` includes nodeId? for completion tracking
@@ -150,23 +193,8 @@
 ## TODO
 
 ### Battle
-- ✅ Invulnerability frames for two-turn invisible moves — `chargingMove.invisible` flag checked in engine; bypass moves (Earthquake vs Dig, Surf vs Dive, etc.) deal double damage via `INVULNERABILITY_BYPASSES`
-- ✅ Weather system — Rain, Sun, Sandstorm, Snow (Hail skipped: Gen 9 replaced by Snow)
-  - Damage: Water/Fire ×1.5/×0.5 in Rain; Fire/Water ×1.5/×0.5 in Sun
-  - End-of-turn: Sandstorm/Snow deal 1/16 max HP (Rock/Ground/Steel immune to Sand; Ice immune to Snow)
-  - Accuracy: Thunder/Hurricane always hit in Rain, 50% in Sun
-  - Stat boosts: Rock +50% SpDef in Sandstorm; Ice +50% Def in Snow
-  - Speed abilities: Swift Swim, Chlorophyll, Sand Rush, Slush Rush (×2 in matching weather)
-  - Weather abilities on switch-in: Drought, Drizzle, Sand Stream, Snow Warning
-  - Ability effects: Rain Dish (heal 1/16 in Rain), Dry Skin (heal 1/8 in Rain / take 1/8 in Sun), Solar Power (+50% SpAtk / take 1/8 in Sun), Ice Body (heal 1/16 in Snow)
 - [ ] Terrain system
-- ✅ Entry hazards — Stealth Rock (type-effective damage), Spikes (1-3 layers: 1/8, 1/6, 1/4), Toxic Spikes (1-2 layers; absorbed by Poison types), Sticky Web (Speed -1); applied on switch-in to both sides
-- ✅ OHKO moves (Fissure, Guillotine, Horn Drill, Sheer Cold) — level-based accuracy, fails if target level > user level; Sheer Cold -10% vs non-Ice
-- ✅ Protect / Detect and variants (King's Shield, Spiky Shield, Baneful Bunker, Obstruct, Silk Trap) — base protection, consecutive diminishing returns (1/3 chance), and secondary contact effects fully implemented
-- ✅ Contact system — `AttackMove.contact` field (physical default true, special default false); `.noContact()` marks 40 physical non-contact moves; `.makeContact()` marks 5 special contact moves (Grass Knot, Draining Kiss, Infestation, Oblivion Wing, Sparkling Aria)
-- ✅ Shell Side Arm — dynamic physical/special resolution; contact flag follows whichever category wins
-- ✅ Switch-out moves (U-turn, Volt Switch, Flip Turn) — damage then triggers forced switch UI if player has a healthy alternative
-- ✅ Delayed damage (Future Sight, Doom Desire) — damage pre-calculated at use time from user's Sp. Atk, fires after 2 turns via end-of-turn tick, respects type immunity
+- [ ] In-battle item use (bag UI during battle)
 
 ### Content
 - [ ] Gym battles (GymScene not started)
@@ -176,7 +204,6 @@
 - [ ] More lore entries
 - [ ] More trainer classes
 - [ ] Elite Four
-- [ ] Items usable during battle (in-battle bag UI)
 
 ## Architecture Notes
 - **Phaser 4 only** — `filters.addGlow()`, not `postFX.addGlow()`
