@@ -1,0 +1,2141 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../pokemon_class_refactor/">
+      
+      
+        <link rel="next" href="../progress/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Pokémon Class System — Design Document - My Repository Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pokemon-class-system-design-document" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Repository Docs" class="md-header__button md-logo" aria-label="My Repository Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Repository Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Pokémon Class System — Design Document
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Repository Docs" class="md-nav__button md-logo" aria-label="My Repository Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Repository Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solwara — Lore &amp; Design Bible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dev
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit_changes_2025_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit-Driven Changes — May 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_audit_2025_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solwara Code Audit — May 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pokemon_class_refactor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokemon Class Refactor — Forms &amp; Display Names
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokémon Class System — Design Document
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokémon Class System — Design Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New File Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-layer-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Three-Layer Stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speciesid-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SpeciesId Enum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pokemonspecies-and-pokemonform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PokemonSpecies and PokemonForm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Builder API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registry-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registry Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runpokemon-shape-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RunPokemon Shape Change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtimepokemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RuntimePokemon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learnsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learnsets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save Timing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dev-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dev Mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#call-site-migration-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Call Site Migration Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-deferred" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Deferred
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phased-implementation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phased Implementation Plan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../progress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tech_debt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech Debt &amp; Known Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mechanics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/battle_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battle System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/catch_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Catch System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/evolution_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evolution System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/map_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/meta_progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/move_mastery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Move Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/move_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Move System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/node_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Node Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/replayability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replayability &amp; Branching Narrative
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/spawn_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spawn System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/zone_progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zone Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokemon
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pokemon
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pokemon/starters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starter Pokémon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Story
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Story
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/climax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Kyogre Revelation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/e4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elite Four &amp; Final Boss
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/faction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Unforgotten Party
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/gym_leaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gym Leaders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Player Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/themes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Themes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    World
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../world/lore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World Lore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#new-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        New File Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-three-layer-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Three-Layer Stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speciesid-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SpeciesId Enum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pokemonspecies-and-pokemonform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PokemonSpecies and PokemonForm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#builder-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Builder API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registry-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registry Functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runpokemon-shape-change" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RunPokemon Shape Change
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runtimepokemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RuntimePokemon
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learnsets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learnsets
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save Timing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dev-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dev Mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#call-site-migration-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Call Site Migration Map
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-deferred" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What's Deferred
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phased-implementation-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phased Implementation Plan
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="pokemon-class-system-design-document">Pokémon Class System — Design Document</h1>
+<p><strong>Status:</strong> Approved, pending implementation<br />
+<strong>Replaces:</strong> <code>pokemon_class_refactor.md</code> (superseded)</p>
+<hr />
+<h2 id="the-problem">The Problem</h2>
+<p>The current system uses <code>base.json</code> — a PokéAPI artifact — as the runtime source of truth for all Pokémon data. This creates several classes of bugs and architectural weaknesses:</p>
+<ul>
+<li>Form display names are inferred at runtime via fragile suffix-stripping (<code>monName.ts</code>, <code>stripFormSuffix</code>)</li>
+<li>Two duplicate <code>FORM_SUFFIXES</code> lists exist in the codebase and are already out of sync</li>
+<li>Alternate forms like <code>giratina-altered</code>, <code>aegislash-blade</code>, <code>castform-sunny</code> are not correctly stripped and display with raw slug names</li>
+<li>Regional forms like <code>marowak-alola</code> strip to <code>Marowak</code> instead of <code>Alolan Marowak</code></li>
+<li>No type safety — species are raw <code>number</code> everywhere, <code>pokemonDb[dex]</code> can silently return <code>undefined</code></li>
+<li><code>BattlePokemon</code> and <code>RunPokemon</code> have no formal relationship — syncing between them is manual and error-prone</li>
+<li><code>SaveManager.save()</code> is called too eagerly, inside battle flows where it should never fire</li>
+</ul>
+<hr />
+<h2 id="new-file-structure">New File Structure</h2>
+<pre><code>src/data/pokemon/
+  SpeciesId.ts                  — enum, all ~1025 species, fully explicit values
+  PokemonSpecies.ts             — PokemonSpecies, PokemonForm, SpeciesBuilder, FormBuilder classes
+  species/
+    gen1.ts                     — registry entries for Gen 1
+    gen2.ts
+    gen3.ts
+    gen4.ts
+    gen5.ts
+    gen6.ts
+    gen7.ts
+    gen8.ts
+    gen9.ts
+    index.ts                    — assembles all gens, exports speciesRegistry
+  learnsets/
+    level.ts                    — re-keyed from level.json, uses SpeciesId
+    tm.ts
+    tutor.ts
+    egg.ts
+    formOverrides.ts            — form-specific learnset overrides (SpeciesId → formKey → LevelMove[])
+
+src/systems/pokemon/
+  RuntimePokemon.ts             — NEW: wraps RunPokemon + species reference, adds methods
+</code></pre>
+<p><strong>Deleted once migration is complete:</strong>
+- <code>src/data/pokemon/base.json</code>
+- <code>src/data/pokemon/learnsets/level.json</code>
+- <code>src/data/pokemon/learnsets/tm.json</code>
+- <code>src/data/pokemon/learnsets/tutor.json</code>
+- <code>src/utils/monName.ts</code> (replaced by <code>getDisplayName()</code>)</p>
+<hr />
+<h2 id="the-three-layer-stack">The Three-Layer Stack</h2>
+<pre><code>RunPokemon          — plain interface, serialized to localStorage
+    ↓ wraps
+RuntimePokemon      — in-memory class, adds species methods, used everywhere outside battle
+    ↓ wraps
+BattlePokemon       — adds ephemeral battle state, thrown away on tab close / battle end
+</code></pre>
+<p>Each layer owns distinct concerns:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Owns</th>
+<th>Persists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RunPokemon</code></td>
+<td>speciesId, formKey, nickname, level, moves, pp, hp, status, heldItem, exp</td>
+<td>Yes — localStorage</td>
+</tr>
+<tr>
+<td><code>RuntimePokemon</code></td>
+<td>species reference, display methods, stat lookups</td>
+<td>No — in-memory only</td>
+</tr>
+<tr>
+<td><code>BattlePokemon</code></td>
+<td>stat stages, confusion, flinch, protect state, charge state, uid</td>
+<td>No — ephemeral</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="speciesid-enum"><code>SpeciesId</code> Enum</h2>
+<p>Fully explicit on every entry — no auto-increment, no ambiguity if species are ever reordered.</p>
+<pre><code class="language-ts">// src/data/pokemon/SpeciesId.ts
+
+export enum SpeciesId {
+  BULBASAUR   = 1,
+  IVYSAUR     = 2,
+  VENUSAUR    = 3,
+  CHARMANDER  = 4,
+  CHARMELEON  = 5,
+  CHARIZARD   = 6,
+  // ...
+  MR_MIME     = 122,
+  // ...
+  NIDORAN_F   = 29,
+  NIDORAN_M   = 32,
+  // all ~1025 species, explicit
+}
+</code></pre>
+<p>All current uses of raw <code>number</code> for species (<code>pokemonDb[dex]</code>, <code>RunPokemon.dex</code>, <code>BattlePokemon.speciesId</code>) migrate to <code>SpeciesId</code>.</p>
+<hr />
+<h2 id="pokemonspecies-and-pokemonform"><code>PokemonSpecies</code> and <code>PokemonForm</code></h2>
+<pre><code class="language-ts">// src/data/pokemon/PokemonSpecies.ts
+
+export interface BaseStats {
+  hp: number; atk: number; def: number;
+  spAtk: number; spDef: number; spe: number;
+}
+
+// Abilities: [slot1, slot2 | null, hidden]
+export type AbilitySlots = [string, string | null, string];
+
+export type GrowthRate =
+  | 'erratic' | 'fast' | 'medium-fast' | 'medium-slow' | 'slow' | 'fluctuating';
+
+export class PokemonForm {
+  readonly speciesId:  SpeciesId;
+  readonly formKey:    string;       // &quot;sandy&quot;, &quot;alola&quot;, &quot;zen&quot; — slug used in saves + sprite lookup
+  readonly formName:   string;       // &quot;Sandy Cloak&quot;, &quot;Alolan Form&quot;, &quot;Zen Mode&quot; — display
+  readonly types:      [string, string?];
+  readonly stats:      BaseStats;
+  readonly abilities:  AbilitySlots;
+}
+
+export class PokemonSpecies {
+  readonly id:          SpeciesId;
+  readonly name:        string;      // &quot;Wormadam&quot;, &quot;Mr. Mime&quot; — display-ready, not a slug
+  readonly types:       [string, string?];
+  readonly stats:       BaseStats;
+  readonly abilities:   AbilitySlots;
+  readonly catchRate:   number;
+  readonly genderRatio: number | null;  // % male; null = genderless
+  readonly growthRate:  GrowthRate;
+  readonly baseExp:     number;
+  readonly legendary:   boolean;
+  readonly mythical:    boolean;
+  readonly forms:       PokemonForm[];
+
+  // Returns the form matching the given key, or null
+  getForm(formKey: string | null): PokemonForm | null
+
+  // Returns the display name, accounting for form
+  // null/undefined formKey → species name only (&quot;Wormadam&quot;)
+  // with formKey → &quot;Sandy Cloak Wormadam&quot;, &quot;Alolan Marowak&quot;, etc.
+  getDisplayName(formKey?: string | null): string
+
+  getTypes(formKey?: string | null): [string, string?]
+  getStats(formKey?: string | null): BaseStats
+  getAbilities(formKey?: string | null): AbilitySlots
+  getBST(formKey?: string | null): number
+}
+</code></pre>
+<p>Forms are <strong>always fully explicit</strong> — abilities, types, and stats are never inherited from the parent species. More verbose, zero ambiguity.</p>
+<hr />
+<h2 id="builder-api">Builder API</h2>
+<p>Fluent registration used in the gen files. <code>.addForm()</code> returns a <code>FormBuilder</code>; calling <code>.addForm()</code> again or finishing the chain returns to the <code>SpeciesBuilder</code>.</p>
+<pre><code class="language-ts">// Simple species — no forms
+addSpecies(SpeciesId.MACHOP, 'Machop')
+  .types('fighting')
+  .stats({ hp: 70, atk: 80, def: 50, spAtk: 35, spDef: 35, spe: 35 })
+  .abilities('guts', 'no-guard', 'steadfast')
+  .catchRate(180)
+  .genderRatio(75)
+  .growthRate('medium-slow')
+  .baseExp(61);
+
+// Species with forms
+addSpecies(SpeciesId.WORMADAM, 'Wormadam')
+  .types('bug', 'grass')
+  .stats({ hp: 60, atk: 59, def: 85, spAtk: 79, spDef: 105, spe: 36 })
+  .abilities('anticipation', null, 'overcoat')
+  .catchRate(45)
+  .genderRatio(0)
+  .growthRate('medium')
+  .baseExp(162)
+  .addForm('Plant Cloak', 'plant')
+    .types('bug', 'grass')
+    .stats({ hp: 60, atk: 59, def: 85, spAtk: 79, spDef: 105, spe: 36 })
+    .abilities('anticipation', null, 'overcoat')
+  .addForm('Sandy Cloak', 'sandy')
+    .types('bug', 'ground')
+    .stats({ hp: 60, atk: 79, def: 105, spAtk: 59, spDef: 85, spe: 36 })
+    .abilities('anticipation', null, 'overcoat')
+  .addForm('Trash Cloak', 'trash')
+    .types('bug', 'steel')
+    .stats({ hp: 60, atk: 69, def: 95, spAtk: 69, spDef: 95, spe: 36 })
+    .abilities('anticipation', null, 'overcoat');
+
+// Regional form — galar rattata gets its own SpeciesId entry, same as now
+addSpecies(SpeciesId.MAROWAK_ALOLA, 'Marowak')
+  .types('fire', 'ghost')
+  .stats({ hp: 60, atk: 80, def: 110, spAtk: 50, spDef: 80, spe: 45 })
+  .abilities('cursed-body', 'lightning-rod', 'rock-head')
+  .catchRate(75)
+  .genderRatio(50)
+  .growthRate('medium-fast')
+  .baseExp(149)
+  .regionalVariant('Alolan');  // drives getDisplayName() → &quot;Alolan Marowak&quot;
+</code></pre>
+<hr />
+<h2 id="registry-functions">Registry Functions</h2>
+<pre><code class="language-ts">// src/data/pokemon/species/index.ts
+
+export function getSpecies(id: SpeciesId): PokemonSpecies
+// Replaces: pokemonDb[dex]
+// Throws if id not found — no silent undefined
+
+export function getAllSpecies(): PokemonSpecies[]
+
+export function isValidSpecies(id: number): id is SpeciesId
+</code></pre>
+<p><code>getForm()</code> and <code>getDisplayName()</code> are methods on <code>PokemonSpecies</code>, not standalone functions — call sites look like:</p>
+<pre><code class="language-ts">getSpecies(SpeciesId.WORMADAM).getDisplayName('sandy')  // &quot;Sandy Cloak Wormadam&quot;
+getSpecies(SpeciesId.MAROWAK_ALOLA).getDisplayName()    // &quot;Alolan Marowak&quot;
+getSpecies(SpeciesId.MACHOP).getDisplayName()           // &quot;Machop&quot;
+</code></pre>
+<hr />
+<h2 id="runpokemon-shape-change"><code>RunPokemon</code> Shape Change</h2>
+<p>Clean break — no migration compatibility needed (dev builds only, no live saves to protect).</p>
+<pre><code class="language-ts">// Before
+interface RunPokemon {
+  dex:      number;
+  // no formKey
+}
+
+// After
+interface RunPokemon {
+  speciesId: SpeciesId;
+  formKey:   string | null;   // null = default form
+  // ...rest unchanged
+}
+</code></pre>
+<hr />
+<h2 id="runtimepokemon"><code>RuntimePokemon</code></h2>
+<p>Wraps <code>RunPokemon</code> and holds a reference to the resolved <code>PokemonSpecies</code>. All display and lookup logic lives here — call sites never need to know about <code>formKey</code> or <code>getSpecies()</code>.</p>
+<pre><code class="language-ts">// src/systems/pokemon/RuntimePokemon.ts
+
+export class RuntimePokemon {
+  private readonly data:    RunPokemon;
+  private readonly species: PokemonSpecies;
+
+  constructor(data: RunPokemon) {
+    this.data    = data;
+    this.species = getSpecies(data.speciesId);
+  }
+
+  // Identity
+  getDisplayName(): string   // nickname if set, else species.getDisplayName(formKey)
+  getSpeciesName(): string   // always the species name, ignores nickname
+  getFormKey(): string | null
+
+  // Species data — form-aware
+  getTypes(): [string, string?]
+  getStats(): BaseStats
+  getAbilities(): AbilitySlots
+  getBST(): number
+  getForm(): PokemonForm | null
+
+  // Save data passthrough — read only
+  get level(): number
+  get hp(): number
+  get maxHp(): number
+  get moves(): string[]
+  get pp(): number[]
+  get maxPp(): number[]
+  get status(): string | null
+  get heldItem(): string | null
+  get currentExp(): number
+  get nickname(): string | null
+
+  // Returns the underlying save data — used when persisting
+  toRunPokemon(): RunPokemon
+}
+</code></pre>
+<p><code>BattleSetup</code>, <code>PartyPicker</code>, <code>EvoScene</code>, and all other consumers that currently call <code>pokemonDb[mon.dex]</code> will instead hold a <code>RuntimePokemon</code> and call its methods directly.</p>
+<hr />
+<h2 id="learnsets">Learnsets</h2>
+<p>Stay as separate files — not moved into the species class. Learnset data is balance data, species data is biological data; they change for different reasons.</p>
+<p>Re-keyed from raw dex numbers to <code>SpeciesId</code>. Structure otherwise unchanged.</p>
+<p>Form-specific learnsets handled via <code>formOverrides.ts</code>:</p>
+<pre><code class="language-ts">// formOverrides.ts
+// Keyed SpeciesId → formKey → LevelMove[]
+// Falls back to species learnset when no override exists
+
+export const formLevelMoveOverrides: Partial&lt;Record&lt;SpeciesId, Record&lt;string, LevelMove[]&gt;&gt;&gt; = {
+  [SpeciesId.DARMANITAN_GALAR]: {
+    'zen': [ /* zen mode specific moves */ ],
+  },
+};
+</code></pre>
+<hr />
+<h2 id="save-timing">Save Timing</h2>
+<p><code>SaveManager.save()</code> must <strong>never</strong> be called from inside <code>systems/battle/</code> or <code>scenes/battle/</code>. The save fires only when a node is marked complete.</p>
+<p>This is intentional design — reloading the tab rewinds to before node entry. Players can retry battles or pick different nodes by reloading. This is a supported play pattern, not a bug.</p>
+<p>Any PR that introduces a <code>save()</code> call inside the battle system should be rejected at review.</p>
+<hr />
+<h2 id="dev-mode">Dev Mode</h2>
+<p><code>__DEV_MODE__</code> is defined in <code>vite.config.ts</code> as a compile-time constant:</p>
+<pre><code class="language-ts">define: {
+  __DEV_MODE__: process.env.DEV_MODE === 'true' || command === 'serve',
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th><code>__DEV_MODE__</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pnpm dev</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>pnpm build</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>pnpm build:dev</code></td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>DevOverrides</code> already gates on this. The settings page gets a <strong>"Clear All Save Data"</strong> button visible only when <code>__DEV_MODE__</code> is <code>true</code>.</p>
+<hr />
+<h2 id="call-site-migration-map">Call Site Migration Map</h2>
+<table>
+<thead>
+<tr>
+<th>Current</th>
+<th>Replacement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pokemonDb[dex]</code></td>
+<td><code>getSpecies(speciesId)</code></td>
+</tr>
+<tr>
+<td><code>pokemonDb[dex]?.name</code></td>
+<td><code>runtimeMon.getDisplayName()</code></td>
+</tr>
+<tr>
+<td><code>monName(nickname, data?.name, dex)</code></td>
+<td><code>runtimeMon.getDisplayName()</code></td>
+</tr>
+<tr>
+<td><code>stripFormSuffix(name)</code></td>
+<td>deleted</td>
+</tr>
+<tr>
+<td><code>FORM_SUFFIXES</code> (both copies)</td>
+<td>deleted</td>
+</tr>
+<tr>
+<td><code>mon.dex</code> on <code>RunPokemon</code></td>
+<td><code>mon.speciesId</code></td>
+</tr>
+<tr>
+<td>raw <code>pokemonDb</code> lookup in scenes</td>
+<td>construct <code>RuntimePokemon</code>, call methods</td>
+</tr>
+</tbody>
+</table>
+<p>19 files, 44 <code>pokemonDb</code> call sites — all touched in the migration phase.</p>
+<hr />
+<h2 id="whats-deferred">What's Deferred</h2>
+<ul>
+<li><strong>In-battle form changes</strong> (Aegislash, Castform, Morpeko, etc.) — the data model supports them (<code>forms</code> array exists on every species), trigger logic not implemented yet</li>
+<li><strong>Shiny / gender sprite variants</strong> — <code>getSpriteKey()</code> stub exists on <code>RuntimePokemon</code>, implementation deferred</li>
+<li><strong>Full learnset authoring</strong> — learnset files will be re-keyed from existing JSON initially; hand-auditing per species is ongoing</li>
+</ul>
+<hr />
+<h2 id="phased-implementation-plan">Phased Implementation Plan</h2>
+<p><strong>Phase 1 — Core scaffolding</strong><br />
+<code>SpeciesId.ts</code>, <code>PokemonSpecies.ts</code> (classes + builder + registry). No species data yet. Verified compiling and importable.</p>
+<p><strong>Phase 2 — Gen 1 data + learnsets</strong><br />
+Author Gen 1 in <code>gen1.ts</code>. Re-key learnset files to <code>SpeciesId</code>. Verify <code>getSpecies()</code>, <code>getDisplayName()</code>, form lookups work against real data.</p>
+<p><strong>Phase 3 — <code>RuntimePokemon</code></strong><br />
+Implement <code>RuntimePokemon.ts</code>. Migrate <code>BattleSetup</code> and one scene (<code>EvoScene</code>) as a proof of concept. Verify the three-layer stack works end to end.</p>
+<p><strong>Phase 4 — Remaining gens</strong><br />
+Gen 2–9, one file at a time. Can be parallelised or done incrementally.</p>
+<p><strong>Phase 5 — Full migration</strong><br />
+Replace all <code>pokemonDb</code> call sites. Delete <code>base.json</code> and old learnset JSON. Delete <code>monName.ts</code>. Update <code>RunPokemon</code> shape. Audit and remove any <code>save()</code> calls inside battle.</p>
+<p><strong>Phase 6 — Dev tooling</strong><br />
+Clear save data button in settings, gated on <code>__DEV_MODE__</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

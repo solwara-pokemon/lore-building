@@ -1,0 +1,2594 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../changelog/">
+      
+      
+        <link rel="next" href="../pokemon_class_refactor/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Solwara Code Audit — May 2025 - My Repository Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#solwara-code-audit-may-2025" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Repository Docs" class="md-header__button md-logo" aria-label="My Repository Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Repository Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Solwara Code Audit — May 2025
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Repository Docs" class="md-nav__button md-logo" aria-label="My Repository Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Repository Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solwara — Lore &amp; Design Bible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dev
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit_changes_2025_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit-Driven Changes — May 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solwara Code Audit — May 2025
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solwara Code Audit — May 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-memory-leaks-resource-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Memory Leaks &amp; Resource Cleanup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Memory Leaks &amp; Resource Cleanup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-phaser-timer-leak-delayedcall-without-cleanup-in-battlescene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Phaser timer leak: delayedCall without cleanup in BattleScene ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-orphaned-pointerdown-listeners-in-battletext-on-fast-skip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Orphaned pointerdown listeners in BattleText on fast-skip ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-graphics-objects-in-battlehud-are-never-destroyed-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Graphics objects in BattleHUD are never destroyed ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-uidcounter-on-battlepokemon-is-module-level-and-never-resets-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 uidCounter on BattlePokemon is module-level and never resets ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-logic-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Logic Bugs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Logic Bugs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-opponentfaintedthisturn-check-doesnt-handle-forceswitchattr-correctly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 opponentFaintedThisTurn check doesn't handle ForceSwitchAttr correctly 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-opponent-move-selection-doesnt-pass-opponent-hazards-during-switch-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Opponent move selection doesn't pass opponent hazards during switch action ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-save-version-migration-is-incomplete-new-fields-can-be-missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Save version migration is incomplete — new fields can be missing 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-freeze-check-fires-twice-per-turn-pre-move-and-end-of-turn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Freeze check fires twice per turn (pre-move and end-of-turn) 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-toxic-counter-is-not-reset-on-status-cure-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Toxic counter is not reset on status cure ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-shell-side-arm-calcdamage-called-twice-rng-consumed-twice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Shell Side Arm calcDamage called twice, RNG consumed twice 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-opponentfaintedthisturn-tracks-reference-change-not-faint-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 opponentFaintedThisTurn tracks reference change, not faint ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-code-quality-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Code Quality Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Code Quality Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-as-any-bypass-in-battlemenus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 as any bypass in BattleMenus ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-duplicated-team-save-logic-in-battleflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Duplicated team-save logic in BattleFlow ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-battleglobals-is-a-global-mutable-singleton-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 BattleGlobals is a global mutable singleton ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-showdialoglines-is-duplicated-between-battlescene-and-battleflow-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 showDialogLines is duplicated between BattleScene and BattleFlow ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-tech-debt-doc-is-out-of-date-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Tech debt doc is out of date ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-void-movename-suppresses-linter-warning-not-intent-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 void moveName suppresses linter warning, not intent ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-hardcoded-exp-charm-and-exp-all-inventory-keys-in-battlesetup-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Hardcoded exp-charm and exp-all inventory keys in BattleSetup ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-savecrypto-secret-is-hardcoded-plaintext-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 SaveCrypto secret is hardcoded plaintext ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-refactor-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Refactor Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Refactor Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-battleengine-resolvemove-is-350-lines-split-into-phases-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 BattleEngine resolveMove is 350+ lines — split into phases ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-dual-delayed-damage-handling-attack-move-and-status-move-branches-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Dual delayed-damage handling (attack move and status move branches) ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-weather-accuracy-override-duplicates-data-from-move-registry-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Weather accuracy override duplicates data from move registry ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-mapgenerator-zone-generation-uses-mathrandom-directly-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 MapGenerator zone generation uses Math.random() directly ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-battlemenusts-mixes-rendering-and-battle-logic-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 BattleMenus.ts mixes rendering and battle logic ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-switch_required-event-handling-in-battleflow-clears-the-remaining-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 switch_required event handling in BattleFlow clears the remaining queue ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-system-interaction-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. System Interaction Notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. System Interaction Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-level-cap-stat-recalculation-in-gainexp-correct-but-incomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Level cap stat recalculation in gainExp ✅ correct but incomplete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-exp-share-interacts-correctly-with-level-cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Exp share interacts correctly with level cap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-ai-hazard-tracking-missing-from-the-switchnormal-branches-see-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 AI hazard tracking missing from the switch/normal branches (see 2.2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-seededrng-and-setbattlerng-battle-is-deterministic-per-seed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 SeededRNG and setBattleRng — battle is deterministic per seed ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-priority-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Priority Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pokemon_class_refactor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokemon Class Refactor — Forms &amp; Display Names
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pokemon_class_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokémon Class System — Design Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../progress/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tech_debt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech Debt &amp; Known Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mechanics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/battle_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battle System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/catch_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Catch System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/evolution_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evolution System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/map_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/meta_progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/move_mastery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Move Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/move_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Move System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/node_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Node Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/replayability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replayability &amp; Branching Narrative
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/spawn_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spawn System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/zone_progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zone Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokemon
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pokemon
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pokemon/starters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starter Pokémon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Story
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Story
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/climax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Kyogre Revelation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/e4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elite Four &amp; Final Boss
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/faction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Unforgotten Party
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/gym_leaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gym Leaders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Player Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/themes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Themes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    World
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../world/lore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World Lore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-memory-leaks-resource-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Memory Leaks &amp; Resource Cleanup
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Memory Leaks &amp; Resource Cleanup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-phaser-timer-leak-delayedcall-without-cleanup-in-battlescene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Phaser timer leak: delayedCall without cleanup in BattleScene ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-orphaned-pointerdown-listeners-in-battletext-on-fast-skip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Orphaned pointerdown listeners in BattleText on fast-skip ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-graphics-objects-in-battlehud-are-never-destroyed-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Graphics objects in BattleHUD are never destroyed ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-uidcounter-on-battlepokemon-is-module-level-and-never-resets-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 uidCounter on BattlePokemon is module-level and never resets ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-logic-bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Logic Bugs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Logic Bugs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-opponentfaintedthisturn-check-doesnt-handle-forceswitchattr-correctly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 opponentFaintedThisTurn check doesn't handle ForceSwitchAttr correctly 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-opponent-move-selection-doesnt-pass-opponent-hazards-during-switch-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Opponent move selection doesn't pass opponent hazards during switch action ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-save-version-migration-is-incomplete-new-fields-can-be-missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Save version migration is incomplete — new fields can be missing 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-freeze-check-fires-twice-per-turn-pre-move-and-end-of-turn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Freeze check fires twice per turn (pre-move and end-of-turn) 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-toxic-counter-is-not-reset-on-status-cure-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 Toxic counter is not reset on status cure ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-shell-side-arm-calcdamage-called-twice-rng-consumed-twice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 Shell Side Arm calcDamage called twice, RNG consumed twice 🐛
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-opponentfaintedthisturn-tracks-reference-change-not-faint-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 opponentFaintedThisTurn tracks reference change, not faint ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-code-quality-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Code Quality Issues
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Code Quality Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-as-any-bypass-in-battlemenus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 as any bypass in BattleMenus ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-duplicated-team-save-logic-in-battleflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Duplicated team-save logic in BattleFlow ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-battleglobals-is-a-global-mutable-singleton-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 BattleGlobals is a global mutable singleton ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-showdialoglines-is-duplicated-between-battlescene-and-battleflow-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 showDialogLines is duplicated between BattleScene and BattleFlow ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-tech-debt-doc-is-out-of-date-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 Tech debt doc is out of date ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-void-movename-suppresses-linter-warning-not-intent-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 void moveName suppresses linter warning, not intent ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-hardcoded-exp-charm-and-exp-all-inventory-keys-in-battlesetup-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Hardcoded exp-charm and exp-all inventory keys in BattleSetup ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#38-savecrypto-secret-is-hardcoded-plaintext-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 SaveCrypto secret is hardcoded plaintext ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-refactor-opportunities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Refactor Opportunities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Refactor Opportunities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-battleengine-resolvemove-is-350-lines-split-into-phases-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 BattleEngine resolveMove is 350+ lines — split into phases ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-dual-delayed-damage-handling-attack-move-and-status-move-branches-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Dual delayed-damage handling (attack move and status move branches) ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-weather-accuracy-override-duplicates-data-from-move-registry-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Weather accuracy override duplicates data from move registry ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-mapgenerator-zone-generation-uses-mathrandom-directly-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 MapGenerator zone generation uses Math.random() directly ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-battlemenusts-mixes-rendering-and-battle-logic-i" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 BattleMenus.ts mixes rendering and battle logic ℹ️
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-switch_required-event-handling-in-battleflow-clears-the-remaining-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 switch_required event handling in BattleFlow clears the remaining queue ⚠️
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-system-interaction-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. System Interaction Notes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. System Interaction Notes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-level-cap-stat-recalculation-in-gainexp-correct-but-incomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Level cap stat recalculation in gainExp ✅ correct but incomplete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-exp-share-interacts-correctly-with-level-cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Exp share interacts correctly with level cap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-ai-hazard-tracking-missing-from-the-switchnormal-branches-see-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 AI hazard tracking missing from the switch/normal branches (see 2.2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-seededrng-and-setbattlerng-battle-is-deterministic-per-seed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 SeededRNG and setBattleRng — battle is deterministic per seed ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-priority-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Priority Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="solwara-code-audit-may-2025">Solwara Code Audit — May 2025</h1>
+<p>Full review of <code>solwara-pokemon/solwara</code> at current <code>main</code>. Covers memory leaks, logic bugs, quality issues, and refactor opportunities now that weather, terrain, hazards, protect, OHKO, two-turn moves, held items, and the move attr system are all live.</p>
+<hr />
+<h2 id="1-memory-leaks-resource-cleanup">1. Memory Leaks &amp; Resource Cleanup</h2>
+<h3 id="11-phaser-timer-leak-delayedcall-without-cleanup-in-battlescene">1.1 Phaser timer leak: delayedCall without cleanup in BattleScene ⚠️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleScene.ts</code></p>
+<p><code>this.time.delayedCall</code> is used twice in <code>create()</code> — the <code>launchBattle</code> call and the <code>showTrainerIntro</code> call — but neither is stored or cancelled in the <code>shutdown</code> listener. If the scene is stopped mid-intro (e.g. the game reloads or the user force-navigates), these timers fire against a destroyed scene and call into dead globals like <code>typewriterText</code>.</p>
+<p><strong>Fix:</strong> Store both <code>delayedCall</code> returns and cancel them in the <code>'shutdown'</code> handler alongside the overlay cleanup that's already there.</p>
+<pre><code class="language-ts">// Already doing:
+this.events.once('shutdown', () =&gt; {
+  overlay.destroy();
+  setWeatherOverlay(null);
+  terrainOv.destroy();
+  setTerrainOverlay(null);
+  // ADD:
+  introTimer?.remove();
+  launchTimer?.remove();
+});
+</code></pre>
+<h3 id="12-orphaned-pointerdown-listeners-in-battletext-on-fast-skip">1.2 Orphaned pointerdown listeners in BattleText on fast-skip ⚠️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleText.ts</code> → <code>typewriterText</code></p>
+<p>There's a 50ms <code>delayedCall</code> before registering the skip handler:</p>
+<pre><code class="language-ts">scene.time.delayedCall(50, () =&gt; {
+  const handler = () =&gt; { skipHandler = null; if (!finished) finish(); };
+  skipHandler = handler;
+  scene.input.once('pointerdown', handler);
+});
+</code></pre>
+<p>If <code>clearAllListeners</code> is called during this 50ms window (because a new message came in), the 50ms timer has already been queued but <code>skipHandler</code> is still null — so the timer fires, registers a handler, and nothing clears it. The handler will then fire spuriously on the next tap and advance a message it shouldn't. This is a race condition, not just theoretical — spamming taps fast enough on mobile triggers it.</p>
+<p><strong>Fix:</strong> Store the 50ms <code>delayedCall</code> in a tracked variable and cancel it inside <code>clearAllListeners</code>:</p>
+<pre><code class="language-ts">let skipDelayTimer: Phaser.Time.TimerEvent | null = null;
+
+export function clearAllListeners(scene: Phaser.Scene) {
+  skipDelayTimer?.remove(); skipDelayTimer = null;
+  // ... rest unchanged
+}
+</code></pre>
+<h3 id="13-graphics-objects-in-battlehud-are-never-destroyed-i">1.3 Graphics objects in BattleHUD are never destroyed ℹ️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleHUD.ts</code></p>
+<p><code>buildHUD</code> creates several <code>scene.add.graphics()</code> objects (panel backgrounds, HP bar backgrounds) that have no <code>destroy()</code> path. Phaser scenes clean up their display lists on <code>shutdown</code>, but the module-level refs (<code>playerHpBar</code>, <code>enemyHpBar</code>, etc.) still hold stale references after the scene restarts. On the next <code>buildHUD</code> call, new objects are created and the old refs are overwritten without ever being explicitly destroyed.</p>
+<p>This is low risk in practice because Phaser's scene manager wipes the display list on <code>shutdown</code> and the scene starts fresh on each battle — but it's worth auditing once scene restart is confirmed to call <code>shutdown</code> cleanly. Setting all module-level refs to <code>null</code> in a <code>clearHUD()</code> export (called from BattleGlobals' shutdown) would make intent clearer and prevent subtle bugs if the scene is ever reused.</p>
+<h3 id="14-uidcounter-on-battlepokemon-is-module-level-and-never-resets-i">1.4 uidCounter on BattlePokemon is module-level and never resets ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattlePokemon.ts</code></p>
+<pre><code class="language-ts">let uidCounter = 0;
+</code></pre>
+<p>This persists across battles. Not a memory leak per se, but after many battles the counter can grow large. No actual impact unless the UIDs are compared numerically (they're strings and used as identity only). Harmless, but worth noting.</p>
+<hr />
+<h2 id="2-logic-bugs">2. Logic Bugs</h2>
+<h3 id="21-opponentfaintedthisturn-check-doesnt-handle-forceswitchattr-correctly">2.1 opponentFaintedThisTurn check doesn't handle ForceSwitchAttr correctly 🐛</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code> → <code>resolveTurnToEvents</code></p>
+<pre><code class="language-ts">const prevOpp = state.opponentActive;
+resolveMove(events, state, state.playerActive, state.opponentActive, playerAction.moveIndex, false);
+if (state.opponentActive !== prevOpp) opponentFaintedThisTurn = true;
+</code></pre>
+<p>This flag is used to skip the opponent's move if the opponent fainted. But <code>state.opponentActive</code> can also change via <code>ForceSwitchAttr</code> (Dragon Tail / Circle Throw) when the opponent is a trainer — a forced switch on a trainer battle swaps the active mon without faint. In that case <code>opponentFaintedThisTurn</code> is set to <code>true</code>, so the newly sent-out mon skips its move entirely this turn.</p>
+<p>This is actually correct <em>for the force-switch case</em> (in Gen V+ the forced-out mon doesn't get to move), but the variable name is misleading and could cause confusion. If the logic around this ever changes, the misnamed flag could cause the new mon to incorrectly skip its turn.</p>
+<p><strong>Fix (low urgency):</strong> Rename to <code>opponentMoveBlockedThisTurn</code> or restructure to track the reason explicitly.</p>
+<h3 id="22-opponent-move-selection-doesnt-pass-opponent-hazards-during-switch-action">2.2 Opponent move selection doesn't pass opponent hazards during switch action ⚠️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code> → <code>resolveTurnToEvents</code> (switch branch)</p>
+<pre><code class="language-ts">resolveMove(events, state, state.opponentActive, state.playerActive,
+  chooseMove({ user: state.opponentActive, target: state.playerActive,
+    moves: opMoveData, rng: _rng, turn: state.turn,
+    // opponentHazards: NOT PASSED — always undefined here
+  }).moveIndex);
+</code></pre>
+<p>When the player switches, the AI's <code>chooseMove</code> is called without <code>opponentHazards</code>, so the AI can't avoid redundantly setting hazards it already set. The <code>run</code> and <code>ball</code> branches have the same gap:</p>
+<pre><code class="language-ts">const opChoice = chooseMove({ ..., opponentHazards: state.playerHazards }); // ✅ run branch
+const opChoice = chooseMove({ ..., opponentHazards: state.playerHazards }); // ✅ ball branch
+</code></pre>
+<p>But the switch branch and the normal-turn branch don't pass <code>opponentHazards</code> to the inner <code>chooseMove</code> call that fires after the player switches.</p>
+<p><strong>Fix:</strong> Add <code>opponentHazards: state.playerHazards</code> to all <code>chooseMove</code> calls consistently.</p>
+<h3 id="23-save-version-migration-is-incomplete-new-fields-can-be-missing">2.3 Save version migration is incomplete — new fields can be missing 🐛</h3>
+<p><strong>File:</strong> <code>src/systems/saves/SaveManager.ts</code> → <code>load()</code></p>
+<pre><code class="language-ts">if (parsed.version === SAVE_VERSION) {
+  if (!parsed.discoveredLore) parsed.discoveredLore = [];
+  return parsed;
+}
+</code></pre>
+<p>Only <code>discoveredLore</code> is backfilled. The following fields added after initial release are <strong>not</strong> backfilled:
+- <code>RunSlot.inventory</code> (defaults to <code>{}</code> in <code>emptySlot</code> but <code>slot.inventory</code> was not always present)
+- <code>RunSlot.charmsEquipped</code> (similar gap)
+- <code>RunSlot.currentExp</code> on <code>RunPokemon</code>
+- <code>RunSlot.heldItem</code> on <code>RunPokemon</code>
+- <code>RunSlot.timeStep</code></p>
+<p>In practice, <code>saveRun</code> always writes <code>Object.assign</code> over any missing fields when a run starts, and <code>BattleSetup</code> uses <code>r.currentExp ?? 0</code> and <code>r.heldItem ?? null</code> defensively. But the gap between a save loaded from disk and a save that has gone through <code>startRun</code> means that some code paths accessing <code>slot.inventory</code> directly (without <code>?? {}</code>) could throw on an old save.</p>
+<p><strong>Fix:</strong> Extend the backfill block to cover all fields added after v1:</p>
+<pre><code class="language-ts">if (!parsed.runSlots[i].charmsEquipped) parsed.runSlots[i].charmsEquipped = [];
+if (!parsed.runSlots[i].inventory)      parsed.runSlots[i].inventory = {};
+// etc.
+</code></pre>
+<h3 id="24-freeze-check-fires-twice-per-turn-pre-move-and-end-of-turn">2.4 Freeze check fires twice per turn (pre-move and end-of-turn) 🐛</h3>
+<p><strong>File:</strong> <code>src/systems/battle/StatusEffects.ts</code></p>
+<p>In <code>checkPreMove</code>:</p>
+<pre><code class="language-ts">if (mon.status === 'freeze') {
+  if (rng() &lt; 0.2) {
+    mon.status = null;  // thaw check 1: at pre-move
+    ...
+  }
+}
+</code></pre>
+<p>In <code>tickStatus</code>:</p>
+<pre><code class="language-ts">case 'freeze': {
+  if (rng() &lt; 0.2) {
+    mon.status = null;  // thaw check 2: at end-of-turn
+    ...
+  }
+}
+</code></pre>
+<p>A frozen Pokémon gets two 20% thaw chances per turn: once when trying to move, and again at end-of-turn. This effectively gives ~36% thaw per turn, which is above the intended 20% per turn from the main-series games (which only do the pre-move check).</p>
+<p><strong>Fix:</strong> Remove the freeze case from <code>tickStatus</code>. Freeze is already handled in <code>checkPreMove</code> and should not tick end-of-turn.</p>
+<h3 id="25-toxic-counter-is-not-reset-on-status-cure-i">2.5 Toxic counter is not reset on status cure ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/StatusEffects.ts</code> → <code>tickStatus</code></p>
+<p>When a badly-poisoned Pokémon wakes up, thaws, or is healed by a move/item, <code>toxicCounter</code> is not reset to 0. If the same <code>BattlePokemon</code> instance is re-poisoned later in the same battle, the counter continues from where it left off, causing disproportionate damage.</p>
+<p>This is low risk because curing poison usually involves items that fully clear the slot, and re-poisoning in the same battle is uncommon. But for full correctness, any code path that sets <code>mon.status = null</code> should also set <code>mon.toxicCounter = 0</code> (or reset it in <code>tryApplyStatus</code> when poison is applied).</p>
+<h3 id="26-shell-side-arm-calcdamage-called-twice-rng-consumed-twice">2.6 Shell Side Arm calcDamage called twice, RNG consumed twice 🐛</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code> → <code>resolveMove</code></p>
+<pre><code class="language-ts">const physResult = calcDamage(attacker, defender, { ...moveData, category: 'physical' }, _rng, state.weather);
+const specResult = calcDamage(attacker, defender, { ...moveData, category: 'special'  }, _rng, state.weather);
+</code></pre>
+<p><code>calcDamage</code> internally rolls a random damage factor. Running it twice to pick the higher result consumes two RNG values, then the chosen path re-runs damage calculation again in the main loop below. This means three RNG rolls for Shell Side Arm instead of one — the actual damage value won't match either of the two preview rolls since a new roll is made later. The category selection is correct, but the displayed damage is derived from a fresh roll.</p>
+<p><strong>Fix:</strong> After determining the winning category, pass the pre-calculated damage result directly without re-running <code>calcDamage</code>:</p>
+<pre><code class="language-ts">const winner = physDmg &gt;= specDmg ? physResult : specResult;
+finalDamage = winner.damage; // use the already-rolled result
+</code></pre>
+<h3 id="27-opponentfaintedthisturn-tracks-reference-change-not-faint-i">2.7 <code>opponentFaintedThisTurn</code> tracks reference change, not faint ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code></p>
+<pre><code class="language-ts">const prevOpp = state.opponentActive;
+resolveMove(...);
+if (state.opponentActive !== prevOpp) opponentFaintedThisTurn = true;
+</code></pre>
+<p>If <code>handleFaint</code> replaces the active mon with the next party member (trainer battle), the reference changes and the flag fires — that's the intended case. But if <code>ForceSwitchAttr</code> (Dragon Tail) fires instead, the reference also changes without a faint. These two cases are conflated. Described more fully under 2.1 above.</p>
+<hr />
+<h2 id="3-code-quality-issues">3. Code Quality Issues</h2>
+<h3 id="31-as-any-bypass-in-battlemenus">3.1 <code>as any</code> bypass in BattleMenus ⚠️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleMenus.ts:251</code></p>
+<pre><code class="language-ts">const enabledBtns = moveBtns.filter(b =&gt; (b as any).bg?.input?.enabled !== false);
+</code></pre>
+<p>This reaches into the internals of <code>TextButton</code> to detect disabled state. The <code>TextButton</code> class should expose a typed <code>isEnabled: boolean</code> property or a <code>disabled</code> flag so this can be checked cleanly. The current pattern is fragile — if <code>TextButton</code>'s internal structure changes, this silently breaks.</p>
+<p><strong>Fix:</strong> Add <code>get isEnabled(): boolean</code> to <code>TextButton</code> that reads from <code>this.bg.input?.enabled ?? true</code>.</p>
+<h3 id="32-duplicated-team-save-logic-in-battleflow">3.2 Duplicated team-save logic in BattleFlow ⚠️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleFlow.ts</code> → <code>endBattle</code></p>
+<p>The "save team state" block appears twice in <code>endBattle</code> — once for the <code>player_win</code> path and once for the <code>player_fled</code> path:</p>
+<pre><code class="language-ts">const savedTeam = slot.team.map((r, i) =&gt; {
+  const bp = battleState.playerParty[i];
+  if (!bp) return r;
+  return { ...r, level: bp.level, hp: bp.currentHp, ... };
+});
+</code></pre>
+<p>These blocks are byte-for-byte identical. Extract to a <code>syncTeamToSave()</code> helper and call it from both branches (and also from <code>player_lose</code> before <code>clearSlot</code>, if HP/PP recovery on loss matters for post-run stats).</p>
+<h3 id="33-battleglobals-is-a-global-mutable-singleton-i">3.3 BattleGlobals is a global mutable singleton ℹ️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleGlobals.ts</code></p>
+<p>The module-level <code>let</code> exports are set once in <code>BattleScene.create()</code> and then read by every other battle subsystem. This pattern works fine for a single-scene game but has no protection against concurrent or re-entrant access. If the battle scene is ever restarted before cleanup completes (e.g. fast fade-out + new battle), the globals would be in a mixed state.</p>
+<p>This is the same pattern as PokeRogue's <code>globalScene</code> and is a known tradeoff. Not a bug now, but worth keeping in mind as more scenes are added. A class-based <code>BattleContext</code> passed through function arguments would be safer at scale.</p>
+<h3 id="34-showdialoglines-is-duplicated-between-battlescene-and-battleflow-i">3.4 <code>showDialogLines</code> is duplicated between BattleScene and BattleFlow ℹ️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleScene.ts</code> and <code>src/scenes/battle/BattleFlow.ts</code></p>
+<p>Both files define an identical <code>showDialogLines(lines, onDone)</code> local function. Extract to <code>BattleText.ts</code> as an exported helper.</p>
+<h3 id="35-tech-debt-doc-is-out-of-date-i">3.5 Tech debt doc is out of date ℹ️</h3>
+<p><strong>File:</strong> <code>docs/dev/tech_debt.md</code></p>
+<p>Several "Unimplemented Mechanics" listed in the tech debt doc are now fully implemented:
+- Weather system ✅ (WeatherOverlay, weatherTurns, end-of-turn damage, stat boosts)
+- Terrain system ✅ (TerrainOverlay, terrainTurns, power modifiers, terrain immunity)
+- Entry hazards ✅ (HazardState, applyHazards, EntryHazardAttr)
+- Protect variants ✅ (ProtectAttr, protectedThisTurn, consecutiveProtects, all variants)
+- OHKO moves ✅ (OhkoAttr, Sheer Cold ice-type penalty)
+- Switch-out effects ✅ (SwitchOutAttr, ForceSwitchAttr, U-turn/Volt Switch/Dragon Tail)
+- Delayed damage ✅ (DelayedDamageAttr, DelayedMove, tickDelayed)
+- Two-turn move invulnerability ✅ (INVULNERABILITY_BYPASSES map, invisible flag)</p>
+<p>The tech debt doc also lists the two-turn move invulnerability as a bug, but it was fixed. Archive resolved items so the doc reflects current reality.</p>
+<h3 id="36-void-movename-suppresses-linter-warning-not-intent-i">3.6 <code>void moveName</code> suppresses linter warning, not intent ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code> → <code>resolveStatusMove</code></p>
+<pre><code class="language-ts">const moveName = registeredMove.type === 'psychic' ? 'Future Sight' : 'Doom Desire';
+msg(events, `${attacker.displayName} foresaw an attack!`);
+void moveName;  // ← declared but only used in this void
+</code></pre>
+<p>The <code>moveName</code> variable is computed but never used. Delete the variable and the <code>void</code> suppression, or use it in the message string.</p>
+<h3 id="37-hardcoded-exp-charm-and-exp-all-inventory-keys-in-battlesetup-i">3.7 Hardcoded <code>exp-charm</code> and <code>exp-all</code> inventory keys in BattleSetup ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleSetup.ts</code></p>
+<pre><code class="language-ts">const expCharms   = Math.min(50, inventory['exp-charm'] ?? 0);
+const expAllCount = Math.min(5,  inventory['exp-all']   ?? 0);
+</code></pre>
+<p>These string keys should be constants from <code>ItemData.ts</code>. If the item keys ever change, this would silently give all players 0 exp bonuses.</p>
+<h3 id="38-savecrypto-secret-is-hardcoded-plaintext-i">3.8 <code>SaveCrypto</code> secret is hardcoded plaintext ℹ️</h3>
+<p><strong>File:</strong> <code>src/utils/SaveCrypto.ts</code></p>
+<pre><code class="language-ts">const APP_SECRET = '5mMcd6Z2tDb14Q5575512WoB05i';
+</code></pre>
+<p>This is fine for a client-side game where the encryption is tamper-detection rather than confidentiality — the GCM auth tag prevents undetected modification. It's worth adding a comment making this intent explicit, so future devs don't assume it's a private key that needs protecting.</p>
+<hr />
+<h2 id="4-refactor-opportunities">4. Refactor Opportunities</h2>
+<h3 id="41-battleengine-resolvemove-is-350-lines-split-into-phases-i">4.1 BattleEngine <code>resolveMove</code> is 350+ lines — split into phases ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code></p>
+<p><code>resolveMove</code> handles 10+ distinct phases sequentially (pre-checks, priority moves, recharge, status, accuracy, damage, multi-hit, secondary effects, switch-out, force-switch) and is hard to follow. Each phase is already well-commented, but the function is too large to modify safely.</p>
+<p>Suggested split:
+- <code>runPreMoveChecks(events, state, attacker, defender, moveData)</code> → returns <code>canContinue</code> 
+- <code>runDamageLoop(events, state, attacker, defender, moveData, hits, ctx)</code> → returns <code>totalDmg</code>
+- Keep <code>resolveMove</code> as a thin orchestrator</p>
+<h3 id="42-dual-delayed-damage-handling-attack-move-and-status-move-branches-i">4.2 Dual delayed-damage handling (attack move and status move branches) ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code></p>
+<p><code>DelayedDamageAttr</code> is handled twice: once in the attack-move branch (lines ~195-213) and once in <code>resolveStatusMove</code>. Both blocks compute the same <code>baseDmg</code> formula with the same logic. The attack-move branch appears to be a legacy path — <code>DelayedDamageAttr</code> should only fire for status moves (Future Sight/Doom Desire are status category). Verify and remove the dead attack-move intercept if confirmed.</p>
+<h3 id="43-weather-accuracy-override-duplicates-data-from-move-registry-i">4.3 Weather accuracy override duplicates data from move registry ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code></p>
+<pre><code class="language-ts">const moveLower = moveData.name.toLowerCase().replace(/ /g, '-');
+if (state.weather === 'rain' &amp;&amp; (moveLower === 'thunder' || moveLower === 'hurricane')) {
+  weatherAccOverride = Infinity;
+}
+</code></pre>
+<p>This hardcodes move names as strings. Thunder and Hurricane are in the move registry — a <code>WeatherAccuracyAttr</code> or flag on the registered move would be cleaner and eliminate the string matching.</p>
+<h3 id="44-mapgenerator-zone-generation-uses-mathrandom-directly-i">4.4 MapGenerator zone generation uses <code>Math.random()</code> directly ℹ️</h3>
+<p><strong>File:</strong> <code>src/systems/map/MapGenerator.ts</code> (inferred from <code>MapGenerator</code> usage in NodeMapScene)</p>
+<p><code>generateFullRun(slot.mapSeed)</code> seeds a <code>SeededRNG</code> but if the generator ever falls through to <code>Math.random()</code> internally (e.g. for sub-steps), maps won't be reproducible across devices. Verify all random calls inside <code>MapGenerator</code> route through the seeded RNG. </p>
+<h3 id="45-battlemenusts-mixes-rendering-and-battle-logic-i">4.5 <code>BattleMenus.ts</code> mixes rendering and battle logic ℹ️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleMenus.ts</code></p>
+<p>The bag/catch flow in <code>showBagMenu</code> calls <code>calcCatch</code>, <code>resolveTurnToEvents</code>, and <code>gainExp</code> directly — core battle-engine functions called from a Phaser UI file. This creates a tight coupling between the menu layer and the engine. Catch resolution should be modelled as a <code>PlayerAction</code> type (<code>{ type: 'ball', ballKey }</code>) and handled by <code>resolveTurnToEvents</code> like other actions. The scene would then just pass the action and play the resulting events.</p>
+<h3 id="46-switch_required-event-handling-in-battleflow-clears-the-remaining-queue">4.6 <code>switch_required</code> event handling in BattleFlow clears the remaining queue ⚠️</h3>
+<p><strong>File:</strong> <code>src/scenes/battle/BattleFlow.ts</code></p>
+<pre><code class="language-ts">case 'switch_required': {
+  const resumeEvents = [...remaining].filter(e =&gt; !(e.type === 'move_use' &amp;&amp; e.moverIsPlayer));
+  remaining.length = 0;
+  showForcedSwitchMenu(playEventQueue, () =&gt; playEventQueue(resumeEvents, onDone));
+  break;
+}
+</code></pre>
+<p>The <code>remaining.length = 0</code> mutates the live queue array that the outer <code>next()</code> loop is iterating. While this works because the event handler returns immediately after showing the menu, it's fragile — any refactor that calls <code>next()</code> after the menu appears would process an empty queue and lose events. A safer pattern is to not mutate <code>remaining</code> at all and instead break the <code>playEventQueue</code> call chain by creating a fresh queue for the resume path.</p>
+<hr />
+<h2 id="5-system-interaction-notes">5. System Interaction Notes</h2>
+<h3 id="51-level-cap-stat-recalculation-in-gainexp-correct-but-incomplete">5.1 Level cap stat recalculation in gainExp ✅ correct but incomplete</h3>
+<p><strong>File:</strong> <code>src/systems/battle/BattleEngine.ts</code> → <code>gainExp</code></p>
+<p>When a Pokémon levels up, stats are recalculated without natures or EVs (consistent with the rest of the engine). The formula correctly handles the Shedinja special case (HP = 1 always) indirectly — Shedinja's base HP of 1 gives <code>maxHp = 1</code> at any level. Worth a comment confirming this is intentional.</p>
+<h3 id="52-exp-share-interacts-correctly-with-level-cap">5.2 Exp share interacts correctly with level cap</h3>
+<p><code>calcExpBase</code> computes base EXP independently of the winner's level cap, so benched Pokémon still receive EXP share even when the active mon is already at cap. This is correct and well-commented.</p>
+<h3 id="53-ai-hazard-tracking-missing-from-the-switchnormal-branches-see-22">5.3 AI hazard tracking missing from the switch/normal branches (see 2.2)</h3>
+<p>The AI's hazard-avoidance score correctly penalises resetting already-set hazards, but only when <code>opponentHazards</code> is passed. Two call sites omit it. See bug 2.2 for the fix.</p>
+<h3 id="54-seededrng-and-setbattlerng-battle-is-deterministic-per-seed">5.4 SeededRNG and <code>setBattleRng</code> — battle is deterministic per seed ✅</h3>
+<p><code>BattleSetup.buildBattleState</code> seeds a <code>SeededRNG</code> from <code>slot.mapSeed ^ (fightNum * 0x1337)</code> and calls <code>setBattleRng</code>. All RNG in the engine flows through <code>_rng</code>, so replaying the same battle from the same seed should produce the same outcome. This is good for debugging.</p>
+<hr />
+<h2 id="6-priority-summary">6. Priority Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Issue</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔴 Bug</td>
+<td>Freeze checks twice per turn (+16% extra thaw)</td>
+<td><code>StatusEffects.ts</code></td>
+</tr>
+<tr>
+<td>🔴 Bug</td>
+<td>Shell Side Arm re-rolls damage after choosing category</td>
+<td><code>BattleEngine.ts</code></td>
+</tr>
+<tr>
+<td>🟡 Bug</td>
+<td>Switch action doesn't pass hazard context to AI</td>
+<td><code>BattleEngine.ts</code></td>
+</tr>
+<tr>
+<td>🟡 Bug</td>
+<td>Save backfill only covers <code>discoveredLore</code></td>
+<td><code>SaveManager.ts</code></td>
+</tr>
+<tr>
+<td>🟡 Leak</td>
+<td><code>delayedCall</code> timers not cancelled on shutdown</td>
+<td><code>BattleScene.ts</code></td>
+</tr>
+<tr>
+<td>🟡 Leak</td>
+<td>Skip-handler 50ms race in typewriter</td>
+<td><code>BattleText.ts</code></td>
+</tr>
+<tr>
+<td>🟡 Quality</td>
+<td><code>as any</code> probe inside TextButton</td>
+<td><code>BattleMenus.ts</code></td>
+</tr>
+<tr>
+<td>🟡 Quality</td>
+<td>Duplicated <code>showDialogLines</code> function</td>
+<td><code>BattleScene.ts</code> / <code>BattleFlow.ts</code></td>
+</tr>
+<tr>
+<td>🟡 Quality</td>
+<td>Duplicated team-save block in endBattle</td>
+<td><code>BattleFlow.ts</code></td>
+</tr>
+<tr>
+<td>🟠 Quality</td>
+<td><code>void moveName</code> dead variable</td>
+<td><code>BattleEngine.ts</code></td>
+</tr>
+<tr>
+<td>🟠 Quality</td>
+<td><code>switch_required</code> mutates live queue array</td>
+<td><code>BattleFlow.ts</code></td>
+</tr>
+<tr>
+<td>🟠 Refactor</td>
+<td><code>resolveMove</code> is 350+ lines</td>
+<td><code>BattleEngine.ts</code></td>
+</tr>
+<tr>
+<td>🟠 Refactor</td>
+<td>Catch/bag logic in menu layer</td>
+<td><code>BattleMenus.ts</code></td>
+</tr>
+<tr>
+<td>🟠 Debt</td>
+<td>Tech debt doc lists already-fixed items</td>
+<td><code>tech_debt.md</code></td>
+</tr>
+<tr>
+<td>⚪ Minor</td>
+<td><code>toxicCounter</code> not reset on cure</td>
+<td><code>StatusEffects.ts</code></td>
+</tr>
+<tr>
+<td>⚪ Minor</td>
+<td>Hardcoded inventory key strings</td>
+<td><code>BattleSetup.ts</code></td>
+</tr>
+<tr>
+<td>⚪ Minor</td>
+<td>Duplicate delayed-damage handling branches</td>
+<td><code>BattleEngine.ts</code></td>
+</tr>
+<tr>
+<td>⚪ Minor</td>
+<td>Weather accuracy by string match</td>
+<td><code>BattleEngine.ts</code></td>
+</tr>
+<tr>
+<td>⚪ Info</td>
+<td><code>uidCounter</code> never resets across battles</td>
+<td><code>BattlePokemon.ts</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Audit performed on <code>solwara</code> at HEAD of <code>main</code> and <code>lore-building</code> at HEAD of <code>main</code>, May 2025.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

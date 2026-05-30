@@ -1,0 +1,2330 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../pokemon_class_system/">
+      
+      
+        <link rel="next" href="../setup/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Development Progress - My Repository Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#development-progress" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Repository Docs" class="md-header__button md-logo" aria-label="My Repository Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Repository Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Development Progress
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Repository Docs" class="md-nav__button md-logo" aria-label="My Repository Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Repository Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solwara — Lore &amp; Design Bible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dev
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit_changes_2025_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audit-Driven Changes — May 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../code_audit_2025_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solwara Code Audit — May 2025
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pokemon_class_refactor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokemon Class Refactor — Forms &amp; Display Names
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pokemon_class_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokémon Class System — Design Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Progress
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#completed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Completed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Completed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI / UX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#battle-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battle System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#held-item-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Held Item System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-system-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Move System — Complete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trainer-rival-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trainer / Rival System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-progression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map / Progression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daynight-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day/Night System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Items
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lore-npc-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lore / NPC System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Quality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weather System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terrain-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terrain System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#battle-system-additional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battle System — Additional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contact System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protect-secondary-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protect Secondary Effects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TODO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TODO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#battle-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battle UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-progression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meta Progression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recently-completed-this-session-2026-05-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recently Completed (this session, 2026-05-30)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dev Environment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tech_debt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tech Debt &amp; Known Issues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mechanics
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/battle_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Battle System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/catch_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Catch System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/evolution_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evolution System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Items
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/map_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Map System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/meta_progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/move_mastery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Move Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/move_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Move System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/node_types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Node Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/replayability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replayability &amp; Branching Narrative
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/spawn_system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spawn System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/zone_progression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zone Progression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pokemon
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pokemon
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pokemon/starters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starter Pokémon
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Story
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Story
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/climax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Kyogre Revelation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/e4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elite Four &amp; Final Boss
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/faction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Unforgotten Party
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/gym_leaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gym Leaders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/roles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Player Roles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../story/themes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core Themes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    World
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../world/lore/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    World Lore
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#completed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Completed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Completed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ui-ux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UI / UX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#battle-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battle System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#held-item-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Held Item System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-system-complete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Move System — Complete
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trainer-rival-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trainer / Rival System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-progression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Map / Progression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daynight-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day/Night System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Items
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Save System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lore-npc-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lore / NPC System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Quality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weather-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Weather System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terrain-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Terrain System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#battle-system-additional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battle System — Additional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contact-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contact System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protect-secondary-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protect Secondary Effects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Version
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TODO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TODO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#battle-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Battle UI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-progression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meta Progression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recently-completed-this-session-2026-05-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recently Completed (this session, 2026-05-30)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="development-progress">Development Progress</h1>
+<h2 id="completed">Completed</h2>
+<blockquote>
+<p>Items are dated <em>(YYYY-MM-DD)</em> with the date the feature was merged/committed.</p>
+</blockquote>
+<h3 id="infrastructure">Infrastructure</h3>
+<ul>
+<li>✅ Proxmox LXC setup (Debian 13, NAT, VPN access) <em>(2026-05-22)</em></li>
+<li>✅ Nginx serving solwara.scooom.com <em>(2026-05-22)</em></li>
+<li>✅ Phaser 4 + TypeScript + Vite scaffold <em>(2026-05-22)</em></li>
+<li>✅ Deploy service (<code>systemctl start solwara-deploy</code>) <em>(2026-05-22)</em></li>
+<li>✅ Pokemon sprites committed directly to repo (no submodule) <em>(2026-05-24)</em></li>
+</ul>
+<h3 id="ui-ux">UI / UX</h3>
+<ul>
+<li>✅ Theme system (maroon #4a0000, Cinzel + Crimson Pro fonts) <em>(2026-05-23)</em></li>
+<li>✅ i18n system with English translations <em>(2026-05-23)</em></li>
+<li>✅ InputManager (normalizes mouse/touch) <em>(2026-05-23)</em></li>
+<li>✅ KeyBindings system (configurable, persisted) <em>(2026-05-23)</em></li>
+<li>✅ BootScene → SplashScene → TitleScene flow <em>(2026-05-23)</em></li>
+<li>✅ SettingsScene (accessible from all scenes via per-scene button, returnTo pattern) <em>(2026-05-23)</em></li>
+<li>✅ Role Select, Starter Select, Slot Select scenes <em>(2026-05-23)</em></li>
+<li>✅ Logbook on title screen (browse all discovered lore) <em>(2026-05-24)</em></li>
+<li>✅ BagViewer — scrollable bag overlay (finger/mouse drag, one item per row, tier colour-coded, opens PartyPicker on tap) <em>(2026-05-28)</em></li>
+</ul>
+<h3 id="battle-system">Battle System</h3>
+<ul>
+<li>✅ Typed BattleEvent[] stream — all battle actions are events <em>(2026-05-24)</em></li>
+<li>✅ Sequential event queue (playEventQueue) — one event at a time, tap to advance <em>(2026-05-24)</em></li>
+<li>✅ Move animations (PokeRogue battle-anims system) <em>(2026-05-23)</em></li>
+<li>✅ HP bars animate with move animation (smooth tween, color-coded) <em>(2026-05-23)</em></li>
+<li>✅ Damage/heal numbers <em>(2026-05-23)</em></li>
+<li>✅ Typewriter text — skip on first tap, advance on second <em>(2026-05-24)</em></li>
+<li>✅ Two-tap move selection (first tap = info, second tap = confirm) <em>(2026-05-24)</em></li>
+<li>✅ Move detail panel: type/category icons (PokeRogue assets), PP/Power/Accuracy <em>(2026-05-24)</em></li>
+<li>✅ Stat stage popup (hold nameplate) <em>(2026-05-24)</em></li>
+<li>✅ Nameplates with type badges, stat stages, status condition (colour-coded, updates mid-turn) <em>(2026-05-24)</em></li>
+<li>✅ Status display on HUD — colour-coded pill, refreshes on apply and on cure <em>(2026-05-26)</em></li>
+<li>✅ EXP bar + level up events (all 6 growth rate curves) <em>(2026-05-24)</em></li>
+<li>✅ Faint → forced switch menu (PartyPicker, no close button) <em>(2026-05-24)</em></li>
+<li>✅ Enemy auto-swap on faint (enemy_send_out event, sprite rebuild) <em>(2026-05-24)</em></li>
+<li>✅ Fainted pokemon's move skipped (engine-level fix) <em>(2026-05-24)</em></li>
+<li>✅ Catching grants EXP (after caught message) <em>(2026-05-24)</em></li>
+<li>✅ Failed catch → opponent attacks <em>(2026-05-24)</em></li>
+<li>✅ Back sprites for player pokemon <em>(2026-05-24)</em></li>
+<li>✅ Status conditions, abilities, type effectiveness <em>(2026-05-23)</em></li>
+<li>✅ Voluntary switch during battle (PartyPicker 'pick' mode, SWITCH overlay on first tap, second tap confirms; active mon excluded from picker) <em>(2026-05-26)</em></li>
+<li>✅ Pokéball throw animation (arc, open, shrink, bounce, shake, stars on catch) <em>(2026-05-26)</em></li>
+<li>✅ Real catch rates from PokéAPI data <em>(2026-05-26)</em></li>
+<li>✅ Move priority system wired to MoveRegistry (not movesDb) <em>(2026-05-27)</em></li>
+<li>✅ Sleep Talk — Gen IX unselectable list (including Rest), Comatose support, actual sub-move execution, PP not consumed <em>(2026-05-26)</em></li>
+<li>✅ player_send_out event — sprite + HUD update properly sequenced through event queue on both voluntary and forced switch <em>(2026-05-28)</em></li>
+</ul>
+<h3 id="held-item-system">Held Item System</h3>
+<ul>
+<li>✅ HeldItemEffects.ts — 7 hook functions (modifyDamageDealt, modifyDamageReceived, modifyStat, afterDamageDealt, endOfTurn, accuracyModifier, focusSash) <em>(2026-05-28)</em></li>
+<li>✅ Life Orb — 1.3× damage, 1/10 maxHP recoil after each hit <em>(2026-05-28)</em></li>
+<li>✅ Shell Bell — heals 1/8 of damage dealt <em>(2026-05-28)</em></li>
+<li>✅ Choice Band — 1.5× Attack (physical), locks first move used <em>(2026-05-28)</em></li>
+<li>✅ Choice Specs — 1.5× Sp. Attack (special), locks first move used <em>(2026-05-28)</em></li>
+<li>✅ Choice Scarf — 1.5× Speed, locks first move used; locked moves greyed out in move menu <em>(2026-05-28)</em></li>
+<li>✅ Expert Belt — 1.2× damage on super effective hits <em>(2026-05-28)</em></li>
+<li>✅ Assault Vest — special damage ÷1.5; status moves blocked with message <em>(2026-05-28)</em></li>
+<li>✅ Eviolite — 1.5× Def and SpDef if not fully evolved (checks evoChains) <em>(2026-05-28)</em></li>
+<li>✅ Leftovers — +1/16 maxHP at end of turn <em>(2026-05-28)</em></li>
+<li>✅ Black Sludge — +1/16 maxHP for Poison types; -1/8 maxHP for others <em>(2026-05-28)</em></li>
+<li>✅ Rocky Helmet — deals 1/6 attacker's maxHP on contact moves <em>(2026-05-28)</em></li>
+<li>✅ Focus Sash — survive one KO from full HP; item consumed on trigger <em>(2026-05-28)</em></li>
+<li>✅ Kings Rock — 10% flinch chance on all damaging moves <em>(2026-05-28)</em></li>
+<li>✅ Wide Lens — ×1.1 accuracy <em>(2026-05-28)</em></li>
+<li>✅ Zoom Lens — ×1.2 accuracy only when moving second (movingSecond flag threaded through engine) <em>(2026-05-28)</em></li>
+<li>✅ lockedMoveIndex cleared on switch-out <em>(2026-05-28)</em></li>
+</ul>
+<h3 id="move-system-complete">Move System — Complete</h3>
+<ul>
+<li>✅ MoveId const object (789 moves, PokéAPI numeric IDs) <em>(2026-05-26)</em></li>
+<li>✅ Move / AttackMove / StatusMove / SelfStatusMove base classes with <code>.attr()</code> chaining <em>(2026-05-26)</em></li>
+<li>✅ MoveAttr composition system — 16 attr classes: <em>(2026-05-26)</em></li>
+<li><code>StatusEffectAttr</code> (accepts selfTarget param), <code>StatChangeAttr</code>, <code>RecoilAttr</code>, <code>DrainAttr</code>, <code>HealAttr</code></li>
+<li><code>FlinchAttr</code>, <code>ConfuseAttr</code>, <code>FixedDamageAttr</code>, <code>LevelDamageAttr</code>, <code>MultiHitAttr</code></li>
+<li><code>HpRatioDamageAttr</code>, <code>WeightDamageAttr</code>, <code>SpeedRatioDamageAttr</code>, <code>TargetHpDamageAttr</code></li>
+<li><code>StageScaledDamageAttr</code>, <code>TwoTurnMoveAttr</code></li>
+<li><code>RestAttr</code> — full heal, clear status, apply 2-turn sleep (Gen IX)</li>
+<li>✅ MoveRegistry — all 789 moves registered at boot, engine routes through registry exclusively <em>(2026-05-27)</em></li>
+<li>✅ All 16 type families fully declared (789/789 coverage) <em>(2026-05-27)</em></li>
+<li>✅ Variable power moves fully implemented <em>(2026-05-27)</em></li>
+<li>✅ Two-turn moves fully implemented <em>(2026-05-28)</em></li>
+<li>✅ Fixed damage, level-based damage, multi-hit moves <em>(2026-05-26)</em></li>
+<li>✅ Rest properly implemented via RestAttr (was declared but missing attrs) <em>(2026-05-28)</em></li>
+<li>✅ MoveEffects.ts deleted — legacy system fully gone <em>(2026-05-28)</em></li>
+</ul>
+<h3 id="trainer-rival-system">Trainer / Rival System</h3>
+<ul>
+<li>✅ Unified trainer intro: sprite slides in → dialog in battle text box → sprite slides out → pokemon slide in <em>(2026-05-24)</em></li>
+<li>✅ Trainer sprites from PokeRogue (youngster_m, iris for Evan) <em>(2026-05-24)</em></li>
+<li>✅ TrainerDef with preDialog / winDialog / loseDialog <em>(2026-05-24)</em></li>
+<li>✅ Trainer node: picks random class per zone layer, seeded team generation <em>(2026-05-24)</em></li>
+<li>✅ Youngster class: 2 base Normal-type pokemon <em>(2026-05-24)</em></li>
+<li>✅ All post-battle dialog through battle text box (no DialogueOverlay) <em>(2026-05-24)</em></li>
+<li>✅ Win/loss dialog for both trainers and rival <em>(2026-05-24)</em></li>
+</ul>
+<h3 id="map-progression">Map / Progression</h3>
+<ul>
+<li>✅ StS-style 7×15 procedural map (6 seeded paths, no-crossing invariant) <em>(2026-05-26)</em></li>
+<li>✅ Floor guarantees — floor 0 wild, floor 8 item, rival floor, floor 13 settlement/rest, floor 14 gym <em>(2026-05-26)</em></li>
+<li>✅ Isometric stagger layout <em>(2026-05-26)</em></li>
+<li>✅ Pan / zoom / pinch-zoom (activePointers: 2) <em>(2026-05-25)</em></li>
+<li>✅ Starts centred on active node at 1.6× zoom <em>(2026-05-26)</em></li>
+<li>✅ Node selection; node only marked visited on completion (markNodeComplete refactor) <em>(2026-05-28)</em></li>
+<li>✅ markNodeComplete — static method on NodeMapScene; every node scene calls it on successful completion before returning to map <em>(2026-05-28)</em></li>
+<li>✅ Mystery node — all 8 resolved types pass nodeId correctly; lore/item no-entry fallback calls markNodeComplete <em>(2026-05-28)</em></li>
+<li>✅ currentZoneIndex persisted to save on every node entry; restored on load (fixes skip-wave bug) <em>(2026-05-28)</em></li>
+<li>✅ All node types: Wild, Trainer, Rival, Rest, Lore, Item, Settlement, Rescue, NPC, Mystery, Evolution <em>(2026-05-25)</em></li>
+<li>✅ Logbook (account-level, accessible from title + node map) <em>(2026-05-24)</em></li>
+<li>✅ Zone themes (8 distinct visual identities) <em>(2026-05-23)</em></li>
+</ul>
+<h3 id="daynight-system">Day/Night System</h3>
+<ul>
+<li>✅ 14-step cycle: 1-2=Dawn, 3-7=Day, 8-9=Dusk, 10-14=Night <em>(2026-05-24)</em></li>
+<li>✅ Random phase-boundary start per run <em>(2026-05-24)</em></li>
+<li>✅ Advances on every node completion <em>(2026-05-24)</em></li>
+<li>✅ Persists in save slot <em>(2026-05-24)</em></li>
+<li>✅ Affects lore weighting (3× matching phase, 0.25× non-matching) <em>(2026-05-24)</em></li>
+<li>✅ Rest scene background images vary by time of day <em>(2026-05-24)</em></li>
+</ul>
+<h3 id="items">Items</h3>
+<ul>
+<li>✅ Full consumable item pool with tier weights and floor unlocks <em>(2026-05-25)</em></li>
+<li>✅ Full Heal conditional — only appears if team member has non-volatile status condition <em>(2026-05-26)</em></li>
+<li>✅ All 15 held items fully implemented in battle (see Held Item System above) <em>(2026-05-28)</em></li>
+<li>✅ Ball items — Poké Ball ×5 (Common), Great Ball ×5 (Uncommon), Ultra Ball ×5 (Rare) <em>(2026-05-28)</em></li>
+<li>✅ Ball rewards correctly write to slot.balls (not inventory) via ball: effect handler in RewardHandler <em>(2026-05-28)</em></li>
+<li>✅ EXP Charm (stackable, +50% EXP each) <em>(2026-05-24)</em></li>
+<li>✅ Item loot generation passes party for conditional filtering <em>(2026-05-26)</em></li>
+<li>✅ Antidote, Awakening, Burn Heal removed (redundant given Full Heal) <em>(2026-05-26)</em></li>
+</ul>
+<h3 id="save-system">Save System</h3>
+<ul>
+<li>✅ Account-level: discoveredLore[], unlockedCharms, roles <em>(2026-05-23)</em></li>
+<li>✅ Run slots: team, inventory, timeStep, mapSeed, nodesVisited, balls, currentZoneIndex <em>(2026-05-23)</em></li>
+<li>✅ nodesVisited only written on node completion (not on entry) <em>(2026-05-26)</em></li>
+</ul>
+<h3 id="lore-npc-system">Lore / NPC System</h3>
+<ul>
+<li>✅ <code>pickLoreEntry()</code> — seeded RNG, zone + time-of-day filter, rarity weighting (common 6×, uncommon 3×, rare 1×), skips discovered <em>(2026-05-28)</em></li>
+<li>✅ <code>pickNpcEntry()</code> — same as above but filters to entries with <code>npcName</code>, no time-of-day restriction <em>(2026-05-28)</em></li>
+<li>✅ Both functions accept <code>Set&lt;string&gt; | string[]</code> for discovered IDs <em>(2026-05-28)</em></li>
+</ul>
+<h3 id="code-quality">Code Quality</h3>
+<ul>
+<li>✅ <code>monName()</code> / <code>titleCase()</code> utility (<code>src/utils/monName.ts</code>) — all Pokémon name outputs now title-cased (Yungoos not YUNGOOS) <em>(2026-05-28)</em></li>
+<li>✅ PartyPicker <code>'select'</code> mode — single-tap pick, no SWITCH overlay (used in RestScene train flow) <em>(2026-05-28)</em></li>
+<li>✅ Evan sprite updated to new uploaded art <em>(2026-05-29)</em></li>
+<li>✅ <code>SegmentedControl</code> component — reusable horizontal option picker (highlighted active segment, generic typed API) <em>(2026-05-29)</em></li>
+<li>✅ TypeScript zero-error baseline — fixed all pre-existing errors (missing imports, undefined→null, BagViewer wheel handler) <em>(2026-05-29)</em></li>
+</ul>
+<h3 id="settings-ui">Settings UI</h3>
+<ul>
+<li>✅ Full-screen layout — labelled rows with subtitles, bottom bar (Back left / Export↓ Import↑ right) <em>(2026-05-29)</em></li>
+<li>✅ Game Speed — <code>SegmentedControl</code> (Slow / Normal / Fast), replaces tap-to-cycle <em>(2026-05-29)</em></li>
+<li>✅ Move Animations toggle — ON/OFF, gates <code>animPlayer.play()</code> in BattleFlow <em>(2026-05-29)</em></li>
+<li>✅ Weather Animations toggle — ON/OFF, gates <code>WeatherOverlay.setWeather()</code> visuals <em>(2026-05-29)</em></li>
+<li>✅ Damage Numbers toggle (existing, now in full-screen row layout) <em>(2026-05-29)</em></li>
+</ul>
+<h3 id="weather-system">Weather System</h3>
+<ul>
+<li>✅ Rain, Sun, Sandstorm, Snow (Hail skipped — Gen 9 replaced by Snow) <em>(2026-05-29)</em></li>
+<li>✅ Damage modifiers: Water/Fire ×1.5/×0.5 in Rain; Fire/Water ×1.5/×0.5 in Sun <em>(2026-05-29)</em></li>
+<li>✅ End-of-turn: Sandstorm 1/16 damage (Rock/Ground/Steel immune); Snow no damage (Ice +50% Def only) <em>(2026-05-29)</em></li>
+<li>✅ Accuracy overrides: Thunder/Hurricane always hit in Rain, 50% in Sun <em>(2026-05-29)</em></li>
+<li>✅ Speed abilities: Swift Swim, Chlorophyll, Sand Rush, Slush Rush (×2 in matching weather) <em>(2026-05-29)</em></li>
+<li>✅ Weather-setting abilities on switch-in: Drought, Drizzle, Sand Stream, Snow Warning <em>(2026-05-29)</em></li>
+<li>✅ Ability end-of-turn: Rain Dish, Dry Skin, Solar Power, Ice Body <em>(2026-05-29)</em></li>
+<li>✅ WeatherOverlay — particle emitters + screen tint per weather type, respects ms()/getSpeedFactor() <em>(2026-05-29)</em></li>
+<li>✅ <code>weather_change</code> battle event drives visual transitions; clears on expiry or overwrite <em>(2026-05-29)</em></li>
+</ul>
+<h3 id="terrain-system">Terrain System</h3>
+<ul>
+<li>✅ TerrainAttr — mirrors WeatherAttr, engine reads to set terrain state <em>(2026-05-29)</em></li>
+<li>✅ BattleState terrain + terrainTurns fields; terrain_change event type <em>(2026-05-29)</em></li>
+<li>✅ MoveContext terrain field threaded to all attrs <em>(2026-05-29)</em></li>
+<li>✅ Terrain power modifiers: +30% Electric/Grass/Psychic (grounded attacker); −50% Dragon (Misty, grounded defender) <em>(2026-05-29)</em></li>
+<li>✅ Grassy Terrain halves Earthquake, Bulldoze, Magnitude <em>(2026-05-29)</em></li>
+<li>✅ Grassy Terrain end-of-turn +1/16 HP heal for grounded Pokémon <em>(2026-05-29)</em></li>
+<li>✅ 5-turn expiry with messages; terrain_change event on expiry <em>(2026-05-29)</em></li>
+<li>✅ Misty Terrain blocks all non-volatile status + confusion (grounded only) <em>(2026-05-29)</em></li>
+<li>✅ Electric Terrain blocks sleep (grounded only) <em>(2026-05-29)</em></li>
+<li>✅ Psychic Terrain blocks priority moves hitting grounded Pokémon <em>(2026-05-29)</em></li>
+<li>✅ Surge abilities (electric-surge, grassy-surge, misty-surge, psychic-surge) in onSwitchIn <em>(2026-05-29)</em></li>
+<li>✅ All 4 terrain moves registered: Electric Terrain, Grassy Terrain, Misty Terrain, Psychic Terrain <em>(2026-05-29)</em></li>
+<li>✅ TerrainOverlay — bottom-edge gradient glow + subtle field tint, colour per terrain (yellow/green/purple/pink), gentle alpha pulse; reuses showWeatherAnimations toggle; depth 52 <em>(2026-05-29)</em></li>
+</ul>
+<h3 id="battle-system-additional">Battle System — Additional</h3>
+<ul>
+<li>✅ Parting Shot (Dark status move) — lowers Atk/SpAtk then triggers switch UI <em>(2026-05-29)</em></li>
+<li>✅ Recharge moves — Hyper Beam, Giga Impact, Rock Wrecker, Roar of Time, Eternabeam, Meteor Assault, Prismatic Laser all skip next turn via RechargeAttr <em>(2026-05-29)</em></li>
+<li>✅ Foul Play — uses target's Attack stat (FoulPlayAttr, statAtkMult in damage path) <em>(2026-05-29)</em></li>
+<li>✅ Body Press — uses user's Defense stat instead of Attack (BodyPressAttr) <em>(2026-05-29)</em></li>
+<li>✅ Knock Off — 1.5× damage if target holds item, then removes the item (KnockOffAttr) <em>(2026-05-29)</em></li>
+<li>✅ Assurance — doubles power if target was already damaged this turn (AssuranceAttr + damagedThisTurn flag) <em>(2026-05-29)</em></li>
+<li>✅ Payback — doubles power if user moved second (PaybackAttr + movedSecond in MoveContext) <em>(2026-05-29)</em></li>
+<li>✅ Revenge — doubles power if user was damaged this turn (RevengeAttr) <em>(2026-05-29)</em></li>
+<li>✅ Wake-Up Slap — doubles power vs sleeping target, cures sleep (WakeUpSlapAttr) <em>(2026-05-29)</em></li>
+<li>✅ Sucker Punch — fails if target is not using a damaging move (SuckerPunchAttr + pendingPlayerMoveIndex) <em>(2026-05-29)</em></li>
+<li>✅ Dragon Tail / Circle Throw — force opponent to switch to random party member; ends wild battle (ForceSwitchAttr) <em>(2026-05-29)</em></li>
+<li>✅ Battle messages auto-advance after pause (BASE_MSG_PAUSE); tap skips wait; trainer dialog still tap-to-continue <em>(2026-05-29)</em></li>
+<li>✅ Stale pointerdown listeners tracked and explicitly removed — fixes pokéball rethrow bug <em>(2026-05-29)</em></li>
+<li>✅ Fast-tap race condition fixed — autoAdvance handler removes itself before nulling ref; no orphaned .on() listeners; cancelTypewriter clears all listeners <em>(2026-05-29)</em></li>
+<li>✅ setPromptText() — static "What will X do?" label, registers zero input listeners <em>(2026-05-29)</em></li>
+<li>✅ Run (flee) now saves full team state (HP/PP/status) and calls markNodeComplete before returning to map <em>(2026-05-29)</em></li>
+<li>✅ Damage numbers: larger (26px) and linger longer (1400ms) <em>(2026-05-29)</em></li>
+<li>✅ Active mon greyed out in PartyPicker (dark blue tint, "IN BATTLE" label, untappable) <em>(2026-05-29)</em></li>
+<li>✅ AI improvements: OHKO level check, Protect scoring by HP ratio, hazard awareness (skips already-set hazards), pivot moves boosted at low HP <em>(2026-05-29)</em></li>
+<li>✅ Correct <code>implemented('partial')</code> flags — 19 moves demoted from false 'full' status <em>(2026-05-29)</em></li>
+</ul>
+<h3 id="contact-system">Contact System</h3>
+<ul>
+<li>✅ <code>AttackMove.contact</code> on base <code>Move</code> class (physical default true, special default false) <em>(2026-05-29)</em></li>
+<li>✅ <code>.noContact()</code> — 40 physical non-contact moves marked (Earthquake, Rock Slide, Explosion, etc.) <em>(2026-05-29)</em></li>
+<li>✅ <code>.makeContact()</code> — 5 special contact moves (Grass Knot, Draining Kiss, Infestation, Oblivion Wing, Sparkling Aria) <em>(2026-05-29)</em></li>
+<li>✅ Shell Side Arm — <code>ShellSideArmAttr</code>; probes calcDamage twice, uses higher, sets contact flag accordingly <em>(2026-05-29)</em></li>
+</ul>
+<h3 id="protect-secondary-effects">Protect Secondary Effects</h3>
+<ul>
+<li>✅ <code>protectVariant</code> stored on BattlePokemon when protect activates <em>(2026-05-28)</em></li>
+<li>✅ King's Shield → Attack −2 on contact; Spiky Shield → 1/8 HP damage; Baneful Bunker → poison; Obstruct → Def −2; Silk Trap → Speed −1 <em>(2026-05-28)</em></li>
+</ul>
+<h3 id="version">Version</h3>
+<ul>
+<li>✅ <code>src/version.ts</code> — VERSION = '0.1.1' <em>(2026-05-29)</em></li>
+<li>
+<p>✅ Title screen shows <em>The Flooded Region</em> v0.1.1 (italic subtitle + plain version tag) <em>(2026-05-29)</em></p>
+</li>
+<li>
+<p>✅ <code>SceneTypes.ts</code> — <code>NodeMapReturnData</code> includes nodeId? for completion tracking <em>(2026-05-25)</em></p>
+</li>
+<li>✅ <code>PartyPicker</code> 'pick' mode — excludePartyIndex option to hide active mon in battle <em>(2026-05-28)</em></li>
+<li>✅ <code>stagesEqual()</code> helper in StatStages — replaces JSON.stringify comparisons <em>(2026-05-28)</em></li>
+<li>✅ <code>ZONE_ORDER</code> single export from MapGenerator <em>(2026-05-25)</em></li>
+<li>✅ <code>ms()</code> wraps all timing values <em>(2026-05-23)</em></li>
+<li>✅ <code>status_change</code> events — HUD refreshes mid-turn on any status change <em>(2026-05-26)</em></li>
+</ul>
+<h2 id="todo">TODO</h2>
+<h3 id="battle-ui">Battle UI</h3>
+<ul>
+<li>[ ] Move menu keyboard navigation polish (currently functional but uses TextButton grid, not custom carved buttons like action menu)</li>
+</ul>
+<h3 id="content">Content</h3>
+<ul>
+<li>[ ] More trainer classes (currently only Youngster — all trainer battles feel samey)</li>
+<li>[ ] More lore entries (68 entries across 8 zones — passable for alpha, more needed for full release)</li>
+<li>[ ] Elite Four</li>
+</ul>
+<h3 id="meta-progression">Meta Progression</h3>
+<ul>
+<li>[ ] Meta shop (Solwara Coins can be spent — coins earn and display correctly, shop scene not started)</li>
+<li>[ ] Move Mastery system (save schema ready with <code>masteredMoves[]</code>, no UI or battle integration yet)</li>
+</ul>
+<h3 id="known-issues">Known Issues</h3>
+<ul>
+<li>[ ] Settings overlay: opening during battle freeze can orphan the HTML import label (partially mitigated — shutdown cleanup added, edge case may remain)</li>
+</ul>
+<h2 id="recently-completed-this-session-2026-05-30">Recently Completed (this session, 2026-05-30)</h2>
+<ul>
+<li>✅ In-battle Pokéball use via BagViewer (<code>'battle'</code> mode — scrollable, keyboard navigable, fires throwBall on select)</li>
+<li>✅ Battle action menu redesign — asymmetric layout (FIGHT primary left, BAG/POKÉMON/RUN secondary row), carved-stone Graphics buttons, gradient panel, wave/rock edge image</li>
+<li>✅ Move menu visual parity — same gradient background and wave edge as action menu</li>
+<li>✅ Back button bleed-through fixed — waits for pointer up before rebuilding action menu</li>
+<li>✅ Settings import label orphan fix — BattleScene shutdown now calls settingsOverlay.hide()</li>
+<li>✅ Trainer Case overlay — accessible from map and battle via "Trainer" button left of Settings; shows trainer ID, role, money, 8 badge slots (filled as earned; Hope Badge always greyed out)</li>
+<li>✅ Solwara Coins panel on title screen — framed display, gold text, hidden at zero</li>
+<li>✅ Solwara Coins actually awarded on run loss — 10% of inRunMoney converted via battleSave.addCoins() before clearSlot()</li>
+<li>✅ Gym battles fully wired (was listed as TODO but was already complete — GymLeaderData routes through BattleScene with battleType: 'gym', badges awarded in BattleRewardScene)</li>
+<li>✅ Evan sprite updated (was listed as TODO but already done)</li>
+</ul>
+<h2 id="architecture-notes">Architecture Notes</h2>
+<ul>
+<li><strong>Phaser 4 only</strong> — <code>filters.addGlow()</code>, not <code>postFX.addGlow()</code></li>
+<li>Touch = primary, keyboard = bonus</li>
+<li>All battle text through <code>playEventQueue</code> / typewriter events</li>
+<li>All battle dialog (trainer/rival pre/post) through battle text box</li>
+<li>Settings: per-scene button with <code>returnTo</code> pattern</li>
+<li>Game speed: <code>ms()</code> wraps all timing values — ball animations use additional <code>0.7×</code> multiplier</li>
+<li>Trainer sprites: multiatlas from <code>public/images/trainers/</code>, frame <code>0001.png</code> = idle</li>
+<li>Battle animations: PokeRogue assets, <code>public/battle-anims/</code> and <code>public/images/battle_anims/</code></li>
+<li>Type/category icons: PokeRogue <code>public/images/types.png</code> / <code>categories.png</code></li>
+<li>Pokéball sprites: PokeRogue <code>public/images/pb.json</code> / <code>pb.png</code> (multiatlas, frames: <code>pb</code>, <code>pb_opening</code>, <code>pb_open</code> per ball type)</li>
+<li>Move registry populated at boot via <code>registerAll()</code> in SplashScene</li>
+<li><code>movesDb</code> / <code>moves.json</code> still used by <code>BattleMenus</code>, <code>RestScene</code>, <code>RescueScene</code> for display (names, PP) — not battle logic</li>
+<li>Held item hooks: 7 functions in <code>HeldItemEffects.ts</code>, called from <code>BattleEngine</code> at exact points; <code>BattlePokemon</code> carries <code>heldItem</code> + <code>lockedMoveIndex</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
