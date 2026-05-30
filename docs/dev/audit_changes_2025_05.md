@@ -121,20 +121,70 @@ All load paths now go through `migrate()`:
 
 ---
 
-## Open items (updated)
+---
+
+## Pass 3 — All remaining quality and architectural items (commit `b3f71ba`)
+
+### §3.1 — `TextButton.isEnabled` getter
+Added `get isEnabled(): boolean` to `TextButton` that reads `this.bg.input?.enabled !== false`. The `as any` probe in `BattleMenus` is gone; `setupMenuKeys` receives the button array directly. The dead `void enabledBtns` line was removed at the same time.
+
+### §3.2 — `syncTeamToSave()` helper
+The 12-line block mapping `BattlePokemon` back to `RunPokemon` records was copy-pasted identically in both the `player_win` and `player_fled` branches of `endBattle`. Extracted to `syncTeamToSave()` and called from both branches. Single source of truth for what fields are synced.
+
+### §3.4 — `showDialogLines` consolidated
+The function was defined identically in `BattleScene` (private method) and `BattleFlow` (local function). Moved to `BattleText.ts` as an export. Both callers now import it from there. The `DialogueLine` type import was removed from both files as a side effect.
+
+### §3.5 — Tech debt doc updated
+All implemented mechanics (weather, terrain, hazards, protect, OHKO, switch-out, delayed damage, two-turn invulnerability) moved to the Resolved section. The active bug entry for two-turn invulnerability was removed — it had already been fixed. All items from the audit's bug and quality passes were also added to Resolved.
+
+### §3.6 — Dead `void moveName` removed
+The variable was computed but suppressed with `void`. The `msg` call now reads `${attacker.displayName} used ${moveName}!` so Future Sight and Doom Desire announce their name correctly instead of the generic "foresaw an attack!" message.
+
+### §3.7 — Inventory key constants
+`ITEM_KEY_EXP_CHARM = 'exp-charm'` and `ITEM_KEY_EXP_ALL = 'exp-all'` exported from `ItemData.ts`. `BattleSetup` uses them instead of bare string literals. Future renames update one place.
+
+### §4.1 — `resolveMove` split
+`resolveAttackMove(events, state, attacker, defender, slot, moveData, registeredMove, movingSecond)` extracted as a separate function. It owns everything from the accuracy check through the force-switch post-damage handling (~250 lines). `resolveMove` is now a ~100-line orchestrator covering slot lookup, two-turn charge, recharge, status pre-checks, Psychic Terrain block, Sucker Punch, choice lock, PP deduction, move_use event, ability before-move, status branch — then delegates to `resolveAttackMove`. `DamageResult` added to top-level imports; all inline `import()` type references removed.
+
+### §4.2 — Dead `DelayedDamageAttr` block in `resolveStatusMove`
+The duplicate handling block (Future Sight/Doom Desire) inside `resolveStatusMove` is now marked as unreachable with an explanatory comment. Future Sight and Doom Desire are `AttackMove` (special category) so they are always intercepted by the `resolveAttackMove` path and never reach `resolveStatusMove`. The block was left in place with a comment rather than deleted so the reasoning is visible.
+
+### §4.3 — Thunder/Hurricane accuracy via move flag
+`Move` gained a `weatherAccuracy: 'rain-always' | null` field and a `.rainAccuracy()` builder. Thunder and Hurricane are marked `.rainAccuracy()` in their move files. The engine checks `registeredMove?.weatherAccuracy === 'rain-always'` instead of string-matching `moveLower === 'thunder' || moveLower === 'hurricane'`. The `moveLower` variable was removed; the grassy terrain name check inlines its own local `moveName`. Thunder's implementation status was upgraded from `'partial'` to `'full'`.
+
+### §4.4 — Catch/ball logic moved into the engine
+**Before:** `BattleMenus.throwBall` called `calcCatch` directly, ran the ball animation, then called `onCatchSuccess` which called `gainExp`, `unlockStarter`, and wrote to the save — all from the UI layer.
+
+**After:** The engine's `ball` action handler calls `calcCatch`, emits two new event types:
+- `ball_throw { ballKey, ballName, shakeCount, caught }` — scene plays the animation and calls `next()` when it finishes
+- `catch_success { speciesId, displayName, expEvents }` — `BattleFlow.playEvent` handles the save work: `unlockStarter`, team append or party-full path, and replays the `expEvents` sub-queue
+
+`BattleMenus` no longer imports `calcCatch`, `calcExp`, `gainExp`, `pokemonDb`, `BallContext`, or `BattlePokemon`. `onCatchSuccess` was deleted. `BattleEvents` has two new members in the union.
+
+### §4.5 — `switch_required` queue mutation fixed
+`remaining.length = 0` mutated the live array that `playEvent` was iterating when `next()` was called. Replaced with a drain loop using `remaining.shift()` that builds a `resumeEvents` snapshot — same filter (drop player `move_use`), no mutation of the shared reference.
+
+---
+
+## All audit items resolved
 
 | Audit ref | Issue | Status |
 |-----------|-------|--------|
-| §2.2 | AI hazard context on normal turns | ✅ Fixed pass 2 |
-| §2.3 | Save backfill incomplete | ✅ Fixed pass 2 (full migration system) |
-| §2.5 | `toxicCounter` not reset on cure | ✅ Fixed pass 2 |
-| §3.1 | `as any` probe in BattleMenus | Open — TextButton refactor needed first |
-| §3.2 | Duplicated team-save block in endBattle | Open — extract when endBattle changes |
-| §3.4 | `showDialogLines` duplicated | Open — housekeeping pass |
-| §3.5 | Tech debt doc lists implemented items | Open — next doc pass |
-| §3.6 | `void moveName` dead variable | Open — fix opportunistically |
-| §3.7 | Hardcoded inventory key strings | Open — fix when ItemData gets constants |
-| §4.1 | `resolveMove` is 350+ lines | Open — major refactor, own branch |
-| §4.2 | Duplicate delayed-damage handling | Open |
-| §4.3 | Weather accuracy by string match | Open |
-| §4.4–4.5 | Catch logic in menu layer; switch_required queue mutation | Open — design decisions |
+| §1.1 | BattleScene timer leak | ✅ Pass 1 |
+| §1.2 | BattleText skip-handler race | ✅ Pass 1 |
+| §2.1 | Shell Side Arm re-rolls damage | ✅ Pass 1 |
+| §2.4 | Freeze thaw rate double-counted | ✅ Pass 1 |
+| §2.2 | AI hazard context on normal turns | ✅ Pass 2 |
+| §2.3 | Save backfill incomplete | ✅ Pass 2 (migration system) |
+| §2.5 | `toxicCounter` not reset on cure | ✅ Pass 2 |
+| §3.1 | `as any` probe in BattleMenus | ✅ Pass 3 |
+| §3.2 | Duplicated team-save block | ✅ Pass 3 |
+| §3.4 | `showDialogLines` duplicated | ✅ Pass 3 |
+| §3.5 | Tech debt doc stale | ✅ Pass 3 |
+| §3.6 | `void moveName` dead variable | ✅ Pass 3 |
+| §3.7 | Hardcoded inventory key strings | ✅ Pass 3 |
+| §4.1 | `resolveMove` 350+ lines | ✅ Pass 3 |
+| §4.2 | Duplicate delayed-damage handling | ✅ Pass 3 (documented as unreachable) |
+| §4.3 | Weather accuracy by string match | ✅ Pass 3 |
+| §4.4 | Catch logic in menu layer | ✅ Pass 3 |
+| §4.5 | `switch_required` queue mutation | ✅ Pass 3 |

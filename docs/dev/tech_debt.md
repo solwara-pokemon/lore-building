@@ -6,36 +6,11 @@ Active list of known issues, deferred work, and architectural debt. Updated as i
 
 ## Active Bugs
 
-### Two-turn move invulnerability not enforced
-**Location:** `BattleEngine.ts` → `resolveMove` accuracy check
-**Cause:** `chargingMove.invisible` flag is set on `BattlePokemon` during the charge turn for moves like Fly, Dig, Dive, Bounce, Phantom Force, Shadow Force — but the engine doesn't check it when the opponent selects a target. Attacks that should miss an airborne/underground Pokémon currently hit normally.
-**Fix:** In `resolveMove`, before the accuracy check, test if `defender.chargingMove?.invisible === true` and skip the move (show "avoided the attack" message) unless the attacking move has a specific bypass flag (e.g. Earthquake hits Dig, Gust hits Fly).
-**Priority:** Medium
+*No known active bugs as of May 2025 audit.*
 
 ---
 
 ## Unimplemented Mechanics
-
-### Weather system
-Rain Dance, Sunny Day, Sandstorm, Hail, Snowscape — all declared as `not` in their move families. No weather state on `BattleState`, no weather-dependent move power modifiers, no end-of-turn weather damage.
-
-### Terrain system
-Electric Terrain, Grassy Terrain, Misty Terrain, Psychic Terrain — declared `not`. No terrain state on `BattleState`.
-
-### Entry hazards
-Stealth Rock, Spikes, Toxic Spikes, Sticky Web — declared `not`. No hazard state on `BattleState`, no switch-in damage.
-
-### Protect variants
-Protect, Detect, Baneful Bunker, Spiky Shield, King's Shield, Obstruct, Silk Trap, Quick Guard, Wide Guard — all declared `not`. No protection state on `BattlePokemon`.
-
-### OHKO moves
-Horn Drill, Guillotine, Sheer Cold, Fissure — declared `not`. Accuracy formula and type immunity (Ice-types immune to Sheer Cold) not implemented.
-
-### Switch-out effects
-Volt Switch, U-turn, Flip Turn, Parting Shot, Baton Pass, Circle Throw, Dragon Tail — declared `partial`. Damage applies but the switch-out does not trigger.
-
-### Delayed damage
-Future Sight, Doom Desire — declared `not`. Requires a pending-damage queue on `BattleState`.
 
 ### Gym battles
 Gym node shows a placeholder overlay. `GymScene` not started. Gym leaders fully designed in `story/gym_leaders.md`.
@@ -100,3 +75,29 @@ Move names are stored as strings for display but the engine uses numeric `moveId
 - ✅ Status not showing on HUD after Rest/paralysis — fixed via `status_change` events
 - ✅ Rest had no attrs despite `.implemented('full')` — fixed via `RestAttr`
 - ✅ player_send_out event missing — sprite/HUD update now properly sequenced through event queue
+- ✅ Weather system — fully implemented (WeatherOverlay, weatherTurns, end-of-turn damage, stat boosts)
+- ✅ Terrain system — fully implemented (TerrainOverlay, terrainTurns, power modifiers, terrain immunity)
+- ✅ Entry hazards — fully implemented (HazardState, applyHazards, EntryHazardAttr, all four hazard types)
+- ✅ Protect variants — fully implemented (ProtectAttr, protectedThisTurn, consecutiveProtects, all variants)
+- ✅ OHKO moves — fully implemented (OhkoAttr, Sheer Cold ice-type penalty)
+- ✅ Switch-out effects — fully implemented (SwitchOutAttr, ForceSwitchAttr, U-turn/Volt Switch/Dragon Tail)
+- ✅ Delayed damage — fully implemented (DelayedDamageAttr, DelayedMove, tickDelayed)
+- ✅ Two-turn move invulnerability — fully implemented (INVULNERABILITY_BYPASSES map, invisible flag)
+- ✅ Freeze thaw rate double-counted — fixed, thaw check now only in `checkPreMove` (20%/turn)
+- ✅ Shell Side Arm re-rolled damage — fixed, winning DamageResult reused on hit 0
+- ✅ BattleScene intro timers leaked on shutdown — fixed, stored and cancelled in shutdown handler
+- ✅ BattleText skip-handler 50ms race — fixed, skipDelayTimer tracked and cancelled in clearAllListeners
+- ✅ AI hazard context missing on normal turns — fixed, `opponentHazards` passed in determineTurnOrder
+- ✅ `toxicCounter` not reset on status cure — fixed via `clearStatus()` helper
+- ✅ Save backfill incomplete — fixed, full migration system with `migrate()` / `migrateSlot()` / `migratePokemon()`
+- ✅ Thunder/Hurricane accuracy by string match — fixed, `rainAccuracy()` flag on Move, set on Thunder + Hurricane
+- ✅ `as any` probe in BattleMenus — fixed, `TextButton.isEnabled` getter added
+- ✅ `showDialogLines` duplicated — consolidated into BattleText export
+- ✅ Team-save block duplicated in endBattle — extracted to `syncTeamToSave()`
+- ✅ `void moveName` dead variable — removed; message now uses the variable
+- ✅ Hardcoded inventory key strings — `ITEM_KEY_EXP_CHARM` / `ITEM_KEY_EXP_ALL` constants in ItemData
+- ✅ Dead `DelayedDamageAttr` block in resolveStatusMove — marked as unreachable with explanation
+- ✅ `resolveMove` 350+ lines — split; `resolveAttackMove` extracted as a separate phase function
+- ✅ Catch/ball logic in menu layer — engine now emits `ball_throw` + `catch_success` events; BattleFlow handles save
+- ✅ `switch_required` mutated live queue array — fixed, events drained via shift() into snapshot array
+
