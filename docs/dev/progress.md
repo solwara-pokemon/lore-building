@@ -222,17 +222,33 @@
 
 ## TODO
 
-### Battle
-- [ ] In-battle item use (bag UI during battle)
+### Battle UI
+- [ ] Move menu keyboard navigation polish (currently functional but uses TextButton grid, not custom carved buttons like action menu)
 
 ### Content
-- [ ] Gym battles (GymScene not started)
-- [ ] Evan real sprite (currently using iris placeholder)
-- [ ] Move Mastery system
-- [ ] Meta shop (Solwara Coins flow)
-- [ ] More lore entries
-- [ ] More trainer classes
+- [ ] More trainer classes (currently only Youngster — all trainer battles feel samey)
+- [ ] More lore entries (68 entries across 8 zones — passable for alpha, more needed for full release)
 - [ ] Elite Four
+
+### Meta Progression
+- [ ] Meta shop (Solwara Coins can be spent — coins earn and display correctly, shop scene not started)
+- [ ] Move Mastery system (save schema ready with `masteredMoves[]`, no UI or battle integration yet)
+
+### Known Issues
+- [ ] Settings overlay: opening during battle freeze can orphan the HTML import label (partially mitigated — shutdown cleanup added, edge case may remain)
+
+## Recently Completed (this session, 2026-05-30)
+
+- ✅ In-battle Pokéball use via BagViewer (`'battle'` mode — scrollable, keyboard navigable, fires throwBall on select)
+- ✅ Battle action menu redesign — asymmetric layout (FIGHT primary left, BAG/POKÉMON/RUN secondary row), carved-stone Graphics buttons, gradient panel, wave/rock edge image
+- ✅ Move menu visual parity — same gradient background and wave edge as action menu
+- ✅ Back button bleed-through fixed — waits for pointer up before rebuilding action menu
+- ✅ Settings import label orphan fix — BattleScene shutdown now calls settingsOverlay.hide()
+- ✅ Trainer Case overlay — accessible from map and battle via "Trainer" button left of Settings; shows trainer ID, role, money, 8 badge slots (filled as earned; Hope Badge always greyed out)
+- ✅ Solwara Coins panel on title screen — framed display, gold text, hidden at zero
+- ✅ Solwara Coins actually awarded on run loss — 10% of inRunMoney converted via battleSave.addCoins() before clearSlot()
+- ✅ Gym battles fully wired (was listed as TODO but was already complete — GymLeaderData routes through BattleScene with battleType: 'gym', badges awarded in BattleRewardScene)
+- ✅ Evan sprite updated (was listed as TODO but already done)
 
 ## Architecture Notes
 - **Phaser 4 only** — `filters.addGlow()`, not `postFX.addGlow()`
