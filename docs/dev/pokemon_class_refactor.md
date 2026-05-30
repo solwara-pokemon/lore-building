@@ -1,8 +1,10 @@
 # Pokemon Class Refactor — Forms & Display Names
 
+> ⚠️ **Abandoned** — superseded by [`pokemon_class_system.md`](./pokemon_class_system.md)
+
 **Branch proposal for:** `solwara-pokemon/solwara`  
 **Related doc:** `lore-building/docs/dev/`  
-**Status:** Design proposal
+**Status:** Abandoned
 
 ---
 
